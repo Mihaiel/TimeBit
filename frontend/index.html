@@ -14,7 +14,24 @@
     <meta property="og:type" content="website">    
     <title>TimeBit</title>
     <link rel="icon" href="https://mihaiel.com/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="styles/main.css"/>
 </head>
 <body>
+  <main>
+    <h1>Time Entries</h1>
+    <ul id="entries"></ul>
+
+    <script>
+      fetch("http://localhost:3000/api/time")
+        .then((res) => res.json())
+        .then((data) => {
+          const list = document.getElementById("entries");
+          data.forEach(entry => {
+            const li = document.createElement("li");
+            li.textContent = `${entry.task}: ${entry.duration}`;
+            list.appendChild(li);
+          });
+        });
+    </script>
+  </main>
 </body>

@@ -184,7 +184,6 @@ li{
 
 .color-gradient{
     background: -webkit-linear-gradient(45deg, #766C82, #6471E9);
-    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -538,4 +537,3 @@ li{
 .logo svg{
 	color: var(--primary-color);
 }
-

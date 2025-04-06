@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TimeBit</title>
+  </head>
+  <body>
+    <h1>Time Entries</h1>
+    <ul id="entries"></ul>
+
+    <script>
+      fetch("http://localhost:3000/api/time")
+        .then((res) => res.json())
+        .then((data) => {
+          const list = document.getElementById("entries");
+          data.forEach(entry => {
+            const li = document.createElement("li");
+            li.textContent = `${entry.task}: ${entry.duration}`;
+            list.appendChild(li);
+          });
+        });
+    </script>
+  </body>
+</html>
