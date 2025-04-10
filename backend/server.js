@@ -1,31 +1,36 @@
+// 📄 Main JavaScript file for BACKEND behaviour
+
+// 📦 Import required modules
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 
-// ROUTES
+// 🔌 Import API routes
 import timeRoutes from "./routes/timeRoutes.js";
-import dashboardRoutes from "./routes/dashboardRoutes.js"
-import "./config/db.js"; // ✅ this triggers the test connection
+import dashboardRoutes from "./routes/dashboardRoutes.js";
 
-const app = express();
-const port = 3000;
+// 🛠️ Import and run the DB connection (for initial connection test)
+import "./config/db.js";
 
-// Tell the app where to execute the routes code
-app.use("/api/time", timeRoutes);
-app.use("/api/dashboard", dashboardRoutes)
-
-// Needed to use __dirname in ES modules
+// 🧠 Convert ES module URL to __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// 🚀 Initialize the Express app
+const app = express();
+const port = 3000;
 
-/*
-  Serve static files (HTML, CSS, JS) from frontend
-  This means that the main domain starts at frontend
-  -> if we access localhost, we get to /frontend
- */
+// 🔀 Mount API routes
+// All routes in timeRoutes will be available under /api/time
+app.use("/api/time", timeRoutes);
+// All routes in dashboardRoutes will be available under /api/dashboard
+app.use("/api/dashboard", dashboardRoutes);
+
+// 🌐 Serve frontend static files (HTML, CSS, JS)
+// Any request to localhost will serve files from /frontend folder
 app.use(express.static(path.join(__dirname, "../frontend")));
 
+// 🟢 Start the server
 app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+  console.log(`✅ Server is running at: http://localhost:${port}`);
 });

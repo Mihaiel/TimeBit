@@ -1,0 +1,107 @@
+/************ TIMEBIT SIDEBAR ***************
+1. Prefabs and global settings
+
+**********************************************/
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #1E1E1E;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;      /* keeps it fixed on scroll */
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.sidebar-button-container{
+    cursor: pointer;
+}
+  
+.sidebar-top {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    height: 70vh;
+}
+  
+
+.sidebar-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 20px;
+    max-height: 70vh;
+    margin-top: 40px;
+}
+
+.logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.sidebar-button-container{
+    display: flex;
+    gap: 10px;
+    justify-content: start;
+    align-items: center;
+    padding: 10px 0 10px 0;
+    transition: 0.3s;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.sidebar-button-container:hover{
+    background-color: rgb(255,255,255,0.1);
+}
+
+.sidebar-button-container svg{
+    padding-left: 10px;
+}
+
+.sidebar-button-container path{
+    fill: white;
+}
+
+.sidebar-button-container button{
+    border: none;
+    background: none;
+    color: white;
+    cursor: pointer;
+}
+
+.sidebar-ending {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 20px;
+    gap: 40px;
+}
+
+.sidebar-ending :first-child{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nav-selected{
+    background-color: rgb(255,255,255) !important;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.nav-selected path{
+    fill: black;
+}
+
+.nav-selected button{
+    color: black;
+}

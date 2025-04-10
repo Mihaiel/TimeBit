@@ -14,42 +14,42 @@
 
 @font-face{
 	font-family: "inter";
-	src: url("fonts/Inter-Regular.ttf");
+	src: url("../assets/fonts/Inter-Regular.ttf");
 }
 
 @font-face{
 	font-family: "inter-medium";
-	src: url("fonts/Inter-Medium.ttf");
+	src: url("../assets/fonts/Inter-Medium.ttf");
 }
 
 @font-face{
 	font-family: "inter-semibold";
-	src: url("fonts/Inter-SemiBold.ttf");
+	src: url("../assets/fonts/Inter-SemiBold.ttf");
 }
 
 @font-face{
 	font-family: "inter-bold";
-	src: url("fonts/Inter-SemiBold.ttf");
+	src: url("../assets/fonts/Inter-Bold.ttf");
 }
 
 @font-face{
 	font-family: "inter-black";
-	src: url("fonts/Inter-Black.ttf");
+	src: url("../assets/fonts/Inter-Black.ttf");
 }
 
 @font-face{
 	font-family: "inter-italic";
-	src: url("fonts/Inter_18pt-Italic.ttf");
+	src: url("../assets/fonts/Inter_18pt-Italic.ttf");
 }
 
 @font-face{
 	font-family: "inter-medium-italic";
-	src: url("fonts/Inter_18pt-MediumItalic.ttf");
+	src: url("../assets/fonts/Inter_18pt-MediumItalic.ttf");
 }
 
 @font-face{
 	font-family: "inter-thin-italic";
-	src: url("fonts/Inter_18pt-ThinItalic.ttf");
+	src: url("../assets/fonts/Inter_18pt-ThinItalic.ttf");
 }
 
 :root{
@@ -66,6 +66,12 @@
 
 html {
     scroll-behavior: smooth;
+}
+
+main{
+	margin-left: 250px;
+	flex: 1;
+  	padding: 3rem;
 }
 
 p, h1, h2, h3, h4, a, span{
@@ -531,6 +537,10 @@ li{
 }
 
 .logo p{
+	font-size: 47.37px;
+}
+
+.logo h2{
 	font-size: 47.37px;
 }
 
