@@ -2,8 +2,8 @@
 
 // Wait until the DOM is fully loaded
 window.addEventListener("DOMContentLoaded", () => {
-    //loadSidebar();               // Load the sidebar once on initial load
-    loadPage("login");       // Load the default page content (dashboard)
+    loadSidebar();                // Load the sidebar once on initial load
+    loadPage("login", false);     // Load the default page content (dashboard)
   });
   
   /**
@@ -13,7 +13,7 @@ window.addEventListener("DOMContentLoaded", () => {
   async function loadSidebar() {
     try {
       // Fetch the sidebar HTML from the components folder
-      const res = await fetch("/components/sidebar.html");
+      const res = await fetch("/components/sidebar/sidebar.html");
       const html = await res.text();
   
       // Inject the sidebar into the <aside> element
@@ -29,7 +29,7 @@ window.addEventListener("DOMContentLoaded", () => {
           const page = e.currentTarget.dataset.page;  // Get target page from data attribute
 
           selectElement(e.currentTarget);             // Highlight the clicked element
-          loadPage(page);                             // Load selected page
+          loadPage(page, true);                             // Load selected page
         });
       });
     } catch (error) {
@@ -40,14 +40,27 @@ window.addEventListener("DOMContentLoaded", () => {
   /**
    * Loads the selected page's HTML content into the <main> element
    * @param {string} page - The name of the page to load (e.g., "dashboard")
+   * @param {boolean} inside - From where to load the app (e.g., "inside-app" or "outside-app" folder)
    */
-  async function loadPage(page) {
+  async function loadPage(page, inside) {
     try {
-      const res = await fetch(`/main-pages/outside-app/${page}.html`);
+      let path;
+
+      if (inside == true){
+        path = `/main-pages/inside-app/${page}/${page}.html`;
+      } else {
+        path = `/main-pages/outside-app/${page}/${page}.html`;
+      }
+      
+      const res = await fetch(path);
       const html = await res.text();
   
       // Replace current main content with new content
       document.querySelector("main").innerHTML = html;
+
+      // Loads the style corresponding to the html name
+      loadStyle(`${path.replace(".html", ".css")}`);
+
     } catch (error) {
       console.error(`❌ Failed to load page "${page}":`, error);
     }
@@ -61,3 +74,15 @@ window.addEventListener("DOMContentLoaded", () => {
     // Add nav-selected to the clicked Element
     clickedElement.classList.add("nav-selected");
   }
+
+  function loadStyle(href) {
+    // Remove old page-specific styles
+    document.querySelectorAll("link.page-style")?.forEach(link => link.remove());
+  
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.className = "page-style";
+    link.href = href;
+    document.head.appendChild(link);
+  }
+  
