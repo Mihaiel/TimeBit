@@ -1,7 +1,10 @@
-/************ TIMEBIT SIDEBAR ***************
-1. Prefabs and global settings
+/*** 
 
-**********************************************/
+====================================================================
+	SIDEBAR STYLING
+====================================================================
+
+***/
 
 .sidebar {
     width: 250px;
@@ -16,10 +19,6 @@
     top: 0;
     left: 0;
     z-index: 10;
-}
-
-.sidebar-button-container{
-    cursor: pointer;
 }
   
 .sidebar-top {
@@ -55,6 +54,7 @@
     transition: 0.3s;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
+    cursor: pointer;
 }
 
 .sidebar-button-container:hover{
@@ -73,7 +73,10 @@
     border: none;
     background: none;
     color: white;
-    cursor: pointer;
+    /* The standard button has a scale animaton, we don't want this in the sidebar*/
+    animation: none !important;
+	transition: none !important;
+	transform: none !important;
 }
 
 .sidebar-ending {

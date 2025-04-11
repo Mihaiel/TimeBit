@@ -2,8 +2,8 @@
 
 // Wait until the DOM is fully loaded
 window.addEventListener("DOMContentLoaded", () => {
-    loadSidebar();               // Load the sidebar once on initial load
-    loadPage("timesheet");       // Load the default page content (dashboard)
+    //loadSidebar();               // Load the sidebar once on initial load
+    loadPage("login");       // Load the default page content (dashboard)
   });
   
   /**
@@ -17,7 +17,11 @@ window.addEventListener("DOMContentLoaded", () => {
       const html = await res.text();
   
       // Inject the sidebar into the <aside> element
-      document.querySelector("nav").innerHTML = html;
+      const nav = document.querySelector("nav");
+      nav.innerHTML = html;
+
+      // When the sidebar is loaded, give the nav a padding as well so that the main content is on the right side
+      nav.style.paddingRight = "250px";
   
       // Attach event listeners to sidebar buttons
       document.querySelectorAll(".sidebar-button-container").forEach(link => {
@@ -39,7 +43,7 @@ window.addEventListener("DOMContentLoaded", () => {
    */
   async function loadPage(page) {
     try {
-      const res = await fetch(`/pages/${page}.html`);
+      const res = await fetch(`/main-pages/outside-app/${page}.html`);
       const html = await res.text();
   
       // Replace current main content with new content
