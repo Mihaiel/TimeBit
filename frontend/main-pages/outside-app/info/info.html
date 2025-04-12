@@ -7,20 +7,79 @@
         <h2 class="h-1">Regeln:</h2>
         <ul>
             <li>Erst <span class="bold">syncrhonisieren (pullen)</span> dann <span class="bold">hochladen (pushen)</span>.</li>
-            <li>Es werden nur die Dateien bearbeitet, die man zugewiesen bekommen hat.</li>
             <li>Der Code ist ausführlich zu <span class="bold">kommentieren</span>.</li>
             <li>Für Funktionen klare und einheitliche Namen verwenden.</li>
             <li>Kein <span class="bold">CSS</span> oder <span class="bold">JavaScript</span> direkt im HTML.</li>
-            <li>Keine persönlichen Daten im Code. Vertrauliche Daten werden immer vom <span class="bold">.emv</span> rausgelesen.</li>
-            <li>Die HTML Seiten dürfen nur <span class="bold">main.css</span> und die entsprechende <span class="bold">.css</span> der dazugehörigen HTML Seite verwenden.</li>
+            <li>Keine persönlichen Daten im Code. Vertrauliche Daten werden immer aus <span class="bold">.emv</span> rausgelesen.</li>
+            <li>Die HTML Seiten dürfen nur <span class="bold">main.css</span> und die entsprechende <span class="bold">.css</span> der dazugehörigen HTML Seite verwenden. (z.B: Projects darf nur main.css und projects.css verwenden)</li>
+            <li>Die Datei <span class="bold">main.css</span> dient als zentrale Vorlage und darf nur geändert werden, wenn Stil-Elemente betroffen sind, die auf mehreren Seiten verwendet werden.</li>
             <li>Das Frontend soll <span class="bold">GENAU</span> so ausschauen wie es in Figma entwurfen wurde.</li>
         </ul>
      </div>
 
-     <div>
+     <div style="display: flex; gap: 10px; flex-direction: column;">
         <h2 class="h-1">To-Do Liste:</h2>
+        <h3 class="color-primary">Login und Register</h3>
+        <p class="bold">1. Login- und Registrierungsformular im Frontend erstellen</p>
         <ul>
-            <li>Login Seite <span class="code">(frontend/main-pages/outside-app/login)</span> erstellen.</li>
+            <li>Erstelle die Seiten login.html und register.html</li>
+            <li>Eingabefelder: Benutzername, Passwort, Vorname, Nachname (optional: E-Mail, Passwort wiederholen)</li>
+            <li>Style mit eigenen CSS-Dateien (login.css, register.css)</li>
+            <li>Füge einfache Formularvalidierung hinzu (z. B. Pflichtfelder, Passwortlänge)</li>
+            <li>Zeige klare Fehlermeldungen bei: Falschen Anmeldedaten, Benutzername/E-Mail bereits vergeben, Passwörter stimmen nicht überein, Ungültige oder leere Felder</li>
+        </ul>
+        <p class="bold">2. Backend-Routen und Logik einrichten</p>
+        <ul>
+            <li>Erstelle zwei API-Routen: <code class="code">POST /api/login</code> und <code class="code">POST /api/register</code></li>
+            <li>In der Route <code class="code">/register</code>: neuen Nutzer erstellen</li>
+            <li>In der Route <code class="code">/login</code>: Login-Daten prüfen und Erfolg oder Fehler zurückgeben</li>
+            <li>Passwörter mit z. B. bcrypt verschlüsseln</li>
+            <li>Die Daten in der users-Tabelle von der Datenbank speichern</li>
+        </ul>
+        <p class="bold">3. Backend-Routen und Logik einrichten</p>
+        <ul>
+            <li>Erstelle zwei API-Routen: <code class="code">POST /api/login</code> und <code class="code">POST /api/register</code></li>
+            <li>In der Route <code class="code">/register</code>: neuen Nutzer erstellen</li>
+            <li>In der Route <code class="code">/login</code>: Login-Daten prüfen und Erfolg oder Fehler zurückgeben</li>
+            <li>Passwörter mit z. B. bcrypt verschlüsseln</li>
+            <li>Die Daten in der users-Tabelle von der Datenbank speichern</li>
+        </ul>
+        <p class="bold">4. Login-Status im Frontend verwalten</p>
+        <ul>
+            <li>Nutzerzustand merken (eingeloggt oder nicht)</li>
+            <li>Nutze einfache Speicherung mit localStorage, Session-Cookies oder JWT-Token</li>
+            <li>Bei erfolgreichem Login: Timesheet und Sidebar laden</li>
+            <li>Schütze Seiten und Daten davor, ohne Login erreichbar zu sein</li>
+        </ul>
+
+        <h3 class="color-primary">Projects</h3>
+
+        <p class="bold">1. Projektseite im Frontend bauen</p>
+        <ul>
+            <li>Die Datei <code class="code">projects.html</code> unter <code class="code">/main-pages/inside-app/projects/</code> bearbeiten konform Figma Entwurf</li>
+            <li>Zeige zwei Listen aller aktiven und abgeschlossenen Projekte</li>
+            <li>Füge einen Button <code class="bold">+ Create New Project (wie im Figma)</code> hinzu, um ein Formular anzuzeigen</li>
+        </ul>
+
+        <p class="bold">2. API-Routen für Projekte im Backend erstellen</p>
+        <ul>
+            <li>Erstelle folgende Routen: <code class="code">GET /api/projects</code>, <code class="code">POST /api/projects</code>, <code class="code">PUT /api/projects/:id</code>, <code class="code">DELETE /api/projects/:id</code></li>
+            <li>Jede Route arbeitet nur mit Projekten des eingeloggten Nutzers (user_id)</li>
+            <li>Optional: Route zum Hochladen und Verwalten von Bildern (background_image)</li>
+        </ul>
+
+        <p class="bold">3. Formular zur Projekterstellung implementieren</p>
+        <ul>
+            <li>Formularfelder: Titel, Beschreibung, Kategorie, wöchentliche Stunden, Start-/Enddatum, Bild-Upload, Benachrichtigung</li>
+            <li>Füge Frontend-Validierung hinzu (z. B. max. 10 Kategorien, max. 168 Stunden)</li>
+            <li>Beim Absenden: Sende ein <code class="code">POST</code> mit den Formulardaten an <code class="code">/api/projects</code></li>
+        </ul>
+
+        <p class="bold">4. Projekte dynamisch anzeigen und verwalten</p>
+        <ul>
+            <li>Lade alle Projekte des Nutzers per <code class="code">fetch()</code> von <code class="code">/api/projects</code></li>
+            <li>Zeige Projektkarten oder Listen mit Titel, Zeitinfo, Bild und Beschreibung</li>
+            <li>Füge Bearbeiten- und Löschen-Buttons hinzu, die entsprechende Routen aufrufen</li>
         </ul>
     </div>
 

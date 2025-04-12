@@ -23,6 +23,7 @@ window.addEventListener("DOMContentLoaded", () => {
       // When the sidebar is loaded, give the nav a padding as well so that the main content is on the right side
       nav.style.paddingRight = "250px";
 
+      // Loads the sidebar style
       loadStyle("/components/sidebar/sidebar.css");
   
       // Attach event listeners to sidebar buttons
@@ -61,6 +62,7 @@ window.addEventListener("DOMContentLoaded", () => {
         // When the sidebar is loaded, give the nav a padding as well so that the main content is on the right side
         nav.style.paddingRight = "250px";
   
+        // Loads the admin sidebar style
         loadStyle("/components/sidebar-admin/sidebar-admin.css");
     
         // Attach event listeners to sidebar buttons
