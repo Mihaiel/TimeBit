@@ -2,14 +2,15 @@
 
 // Wait until the DOM is fully loaded
 window.addEventListener("DOMContentLoaded", () => {
-    loadAdminSidebar();                // Load the sidebar once on initial load
-    loadPage("info", false);     // Load the main content
+    loadAdminSidebar();
+    loadHeader();
+    loadContent("info", false);
   });
   
   /**
-   * Loads the sidebar HTML into the <nav> element
-   * and attaches click listeners to all navigation buttons
-   */
+  Loads the sidebar HTML into the <nav> element
+  and attaches click listeners to all navigation buttons
+  */
   async function loadSidebar() {
     try {
       // Fetch the sidebar HTML from the components folder
@@ -34,9 +35,9 @@ window.addEventListener("DOMContentLoaded", () => {
           selectElement(e.currentTarget);             // Highlight the clicked element
           if (page == "login" || page == "register")
           {
-            loadPage(page, false);                       // Load selected page from outside-app folder
+            loadContent(page, false);                       // Load selected page from outside-app folder
           } else {
-          loadPage(page, true);                       // Load selected page from inside-app folder
+            loadContent(page, true);                       // Load selected page from inside-app folder
           }
         });
       });
@@ -46,9 +47,9 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
     /**
-   * Loads the ADMIN sidebar HTML into the <nav> element
-   * and attaches click listeners to all navigation buttons
-   */
+    Loads the ADMIN sidebar HTML into the <nav> element
+    and attaches click listeners to all navigation buttons
+    */
     async function loadAdminSidebar() {
       try {
         // Fetch the sidebar HTML from the components folder
@@ -68,14 +69,18 @@ window.addEventListener("DOMContentLoaded", () => {
         // Attach event listeners to sidebar buttons
         document.querySelectorAll(".sidebar-button-container").forEach(link => {
           link.addEventListener("click", (e) => {
-            const page = e.currentTarget.dataset.page;  // Get target page from data attribute
+            const page = e.currentTarget.dataset.page;        // Get target page from data attribute
+
+            // Changes the header title based off the dataset
+            const content_title = document.querySelector(".header h1");
+            content_title.innerHTML = page.toUpperCase();
   
-            selectElement(e.currentTarget);             // Highlight the clicked element
+            selectElement(e.currentTarget);                   // Highlight the clicked element
             if (page == "login" || page == "register")
             {
-              loadPage(page, false);                       // Load selected page from outside-app folder
+              loadContent(page, false);                       // Load selected page from outside-app folder
             } else {
-            loadPage(page, true);                       // Load selected page from inside-app folder
+              loadContent(page, true);                       // Load selected page from inside-app folder
             }
           });
         });
@@ -98,7 +103,7 @@ window.addEventListener("DOMContentLoaded", () => {
    * @param {string} page - The name of the page to load (e.g., "dashboard")
    * @param {boolean} inside - From where to load the page (e.g., "inside-app" or "outside-app" folder)
    */
-  async function loadPage(page, inside) {
+  async function loadContent(page, inside) {
     try {
       let path;
 
@@ -112,7 +117,7 @@ window.addEventListener("DOMContentLoaded", () => {
       const html = await res.text();
   
       // Replace current main content with new content
-      document.querySelector("main").innerHTML = html;
+      document.querySelector('#main-content').innerHTML = html;
 
       // Loads the style corresponding to the html name
       loadStyle(`${path.replace(".html", ".css")}`);
@@ -122,13 +127,22 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function selectElement(clickedElement) {
-    // Remove nav-selected class from all
-    document.querySelectorAll(".sidebar-button-container.nav-selected")
-    .forEach(el => el.classList.remove("nav-selected"));
+  async function loadHeader() {
+    try {
+      let path = `/components/header/header.html`;
+      
+      const res = await fetch(path);
+      const html = await res.text();
+  
+      // Replace current main content with new content
+      document.querySelector("main aside").innerHTML = html;
 
-    // Add nav-selected to the clicked Element
-    clickedElement.classList.add("nav-selected");
+      // Loads the style corresponding to the html name
+      loadStyle(`${path.replace(".html", ".css")}`);
+
+    } catch (error) {
+      console.error(`❌ Failed to load HEADER: `, error);
+    }
   }
 
   function loadStyle(href) {
@@ -139,4 +153,12 @@ window.addEventListener("DOMContentLoaded", () => {
     link.href = href;
     document.head.appendChild(link);
   }
-  
+
+  function selectElement(clickedElement) {
+    // Remove nav-selected class from all
+    document.querySelectorAll(".sidebar-button-container.nav-selected")
+    .forEach(el => el.classList.remove("nav-selected"));
+
+    // Add nav-selected to the clicked Element
+    clickedElement.classList.add("nav-selected");
+  }

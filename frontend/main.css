@@ -72,6 +72,8 @@ body{
 main{
 	flex: 1;
   	padding: 3rem;
+	display: flex;
+	flex-direction: column;
 }
 
 .file-center{
