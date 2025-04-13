@@ -20,3 +20,16 @@
     align-items: center;
     gap: 32px;
 }
+
+.user-header svg{
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.user-header svg:hover{
+    transform: scale(1.05);
+}
+
+.user-header svg:active{
+    transform: scale(0.95);
+}

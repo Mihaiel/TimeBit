@@ -90,7 +90,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         infoButton.addEventListener("click", (e) => {
           const page = e.currentTarget.dataset.page;  // Get target page from data attribute
-          loadPage("info", false)
+          loadContent("info", false)
         });
 
       } catch (error) {

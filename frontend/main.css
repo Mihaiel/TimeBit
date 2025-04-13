@@ -84,7 +84,7 @@ main{
 	height: 100%;
 }
 
-p, h1, h2, h3, h4, a, span{
+p, h1, h2, h3, h4, a, span, li{
     color: #313343;
 }
 
@@ -201,6 +201,17 @@ li{
     font-size: 8.44px !important;
 }
 
+.container{
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.section{
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
 /* --------------------------------------- */
 
 /* ------------ COLORS ------------ */
