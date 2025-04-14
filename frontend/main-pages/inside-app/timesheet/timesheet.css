@@ -5,3 +5,21 @@
 ====================================================================
 
 ***/
+
+.timesheet-header{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.timesheet-header button{
+	padding: 10px;
+	font-size: 20px;
+}
+
+.timesheet-filters{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+}

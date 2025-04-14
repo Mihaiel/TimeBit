@@ -74,6 +74,7 @@ main{
   	padding: 3rem;
 	display: flex;
 	flex-direction: column;
+	gap: 60px;
 }
 
 .file-center{
@@ -549,5 +550,28 @@ button:hover{
 button:active{
 	transform: scale(0.95);
 }
+
+/* --------------------------------------- */
+
+/* ------------ SELECT ------------ */
+select {
+	border-radius: 40px;
+	background-color: var(--white-25-color);
+	color: var(--black-75-color);
+	transition: 0.3s;
+	font-size: 20px;
+	padding: 10px;
+	appearance: none;
+	-webkit-appearance: none; /* Safari */
+	-moz-appearance: none;    /* Firefox */
+	width: auto;
+}
+
+select:hover{
+	background-color: var(--black-color);
+	color: white;
+	cursor: pointer;
+}
+
 
 /* --------------------------------------- */

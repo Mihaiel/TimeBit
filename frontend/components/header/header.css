@@ -24,6 +24,7 @@
 .user-header svg{
     cursor: pointer;
     transition: 0.3s;
+    overflow: visible;
 }
 
 .user-header svg:hover{
