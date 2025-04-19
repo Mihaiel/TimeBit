@@ -1,0 +1,138 @@
+/*** 
+
+====================================================================
+	TIMESHEET STYLING
+====================================================================
+
+***/
+
+.timesheet-header{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.timesheet-header button{
+	padding: 10px;
+	font-size: 20px;
+}
+
+.timesheet-filters{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+}
+  
+.calendar-container {
+	max-width: 100%;
+	overflow-x: auto;
+	margin-top: 40px;
+	border: 1px solid #ccc;
+	border-radius: 40px;
+}
+  
+.calendar-header {
+	display: grid;
+	grid-template-columns: 80px repeat(7, 1fr);
+	background-color: #eaeaea;
+	text-align: center;
+	border-bottom: 1px solid #ccc;
+}
+
+.calendar-header div{
+	height: 40px;
+	padding-top: 10px;
+	border-right: 1px solid #ccc;
+	display: flex;
+	justify-content: end;
+	padding-right: 20px;
+	gap: 5px;
+}
+
+.calendar-header div:last-of-type{
+	border-right: 0;
+}
+
+.time-label-header {
+	background: #f4f4f4;
+}
+
+.calendar-grid {
+	display: flex;
+	position: relative;
+}
+
+.time-labels {
+	display: flex;
+	flex-direction: column;
+	width: 79px;
+	background-color: #fafafa;
+	border-right: 1px solid #ccc;
+}
+
+.time-labels div {
+	height: 40px;
+	text-align: center;
+	font-size: 0.85rem;
+	color: #666;
+}
+
+.week-columns {
+	display: flex;
+	flex: 1;
+}
+
+.day-column {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	border-right: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+}
+
+.day-column.saturday, .day-column.sunday{
+	background-color: #fafafa;
+}
+
+.greyed-out-day-column{
+	background-color: #fafafa;
+}
+
+.time-slot {
+	height: 39px;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+.event-block {
+	position: absolute;
+	background-color: #4a90e2;
+	color: white;
+	font-size: 0.85rem;
+	padding: 4px 8px;
+	border-radius: 4px;
+	width: calc((100% - 80px) / 7 - 10px);
+	margin-left: 5px;
+	z-index: 10;
+	box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.left-right-container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+}
+
+.day-text{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: end;
+	padding: 0 !important;
+}
+
+.day-text :nth-child(2){
+	color: #313343;
+	font-weight: bold;
+}

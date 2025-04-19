@@ -1,0 +1,225 @@
+<div class="timesheet-header">
+    <button class="bold">+ Enter Time</button>
+    <div class="timesheet-filters">
+      <div class="left-right-container">
+        <button id="today">Today</button>
+
+        <button class="bold" id="left-button">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.3536 1.64645C11.5488 1.84171 11.5488 2.15829 11.3536 2.35355L5.70711 8L11.3536 13.6464C11.5488 13.8417 11.5488 14.1583 11.3536 14.3536C11.1583 14.5488 10.8417 14.5488 10.6464 14.3536L4.64645 8.35355C4.45118 8.15829 4.45118 7.84171 4.64645 7.64645L10.6464 1.64645C10.8417 1.45118 11.1583 1.45118 11.3536 1.64645Z" fill="white"/>
+          </svg>          
+        </button>
+
+        <button class="bold" id="right-button">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M4.64645 1.64645C4.84171 1.45118 5.15829 1.45118 5.35355 1.64645L11.3536 7.64645C11.5488 7.84171 11.5488 8.15829 11.3536 8.35355L5.35355 14.3536C5.15829 14.5488 4.84171 14.5488 4.64645 14.3536C4.45118 14.1583 4.45118 13.8417 4.64645 13.6464L10.2929 8L4.64645 2.35355C4.45118 2.15829 4.45118 1.84171 4.64645 1.64645Z" fill="white"/>
+          </svg>
+        </button>
+      </div>
+
+      <select id="month-select" name="month">
+        <option value="1">January</option>
+        <option value="2">February</option>
+        <option value="3">March</option>
+        <option value="4">April</option>
+        <option value="5">May</option>
+        <option value="6">June</option>
+        <option value="7">July</option>
+        <option value="8">August</option>
+        <option value="9">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+      </select>
+  
+      <select id="year-select" name="year">
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
+        <option value="2026">2026</option>
+      </select>
+    </div>
+  </div>
+  
+
+  <div class="calendar-container">
+    <!-- Top header (Mon - Sun) -->
+    <div class="calendar-header">
+      <div class="time-label-header"></div>
+
+      <div class="calendar-day" dataset="">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"></svg>
+          <div class="day-text">
+
+          </div>
+      </div>
+
+      <div class="calendar-day" day="">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"></svg>
+        <div class="day-text">
+
+        </div>
+      </div>
+
+      <div class="calendar-day" day="">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"></svg>
+        <div class="day-text">
+
+        </div>
+      </div>
+
+      <div class="calendar-day" day="">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"></svg>
+        <div class="day-text">
+
+        </div>
+      </div>
+
+      <div class="calendar-day" day="">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"></svg>
+        <div class="day-text">
+
+        </div>
+      </div>
+
+      <div class="calendar-day" day="">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"></svg>
+        <div class="day-text">
+
+        </div>
+      </div>
+
+      <div class="calendar-day" day="">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"></svg>
+        <div class="day-text">
+
+        </div>
+      </div>
+
+    </div>
+  
+    <div class="calendar-grid">
+      <!-- Left time labels -->
+      <div class="time-labels">
+        <div>00:00</div>
+        <div>01:00</div>
+        <div>02:00</div>
+        <div>03:00</div>
+        <div>04:00</div>
+        <div>05:00</div>
+        <div>06:00</div>
+        <div>07:00</div>
+        <div>08:00</div>
+        <div>09:00</div>
+        <div>10:00</div>
+        <div>11:00</div>
+        <div>12:00</div>
+        <div>13:00</div>
+        <div>14:00</div>
+        <div>15:00</div>
+        <div>16:00</div>
+        <div>17:00</div>
+        <div>18:00</div>
+        <div>19:00</div>
+        <div>20:00</div>
+        <div>21:00</div>
+        <div>22:00</div>
+        <div>23:00</div>
+      </div>
+  
+      <!-- Week columns -->
+      <div class="week-columns">
+        <div class="day-column">
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div>
+        </div>
+      
+        <!-- Tuesday -->
+        <div class="day-column">
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div>
+        </div>
+      
+        <!-- Wednesday -->
+        <div class="day-column">
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div>
+        </div>
+      
+        <!-- Thursday -->
+        <div class="day-column">
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div>
+        </div>
+      
+        <!-- Friday -->
+        <div class="day-column">
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div>
+        </div>
+
+        <!-- Saturday -->
+        <div class="day-column saturday">
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div>
+        </div>
+
+        <!-- Sunday -->
+        <div class="day-column sunday">
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div><div class="time-slot"></div>
+          <div class="time-slot"></div><div class="time-slot"></div>
+        </div>
+      </div>
+  
+      <!-- Dummy entry (positioned manually) -->
+      <div class="event-block" style="top: 120px; left: 200px; height: 60px;">
+        Projekt X<br>09:00 – 10:00
+      </div>
+  
+      <div class="event-block" style="top: 360px; left: 320px; height: 90px;">
+        Meeting<br>15:00 – 16:30
+      </div>
+  
+    </div>
+  </div>
