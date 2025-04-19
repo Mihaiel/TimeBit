@@ -79,6 +79,8 @@ window.pageInit = function() {
     
     // Select all the calendar days, and get the week labels
     const dayObject = document.querySelectorAll(".calendar-day .day-text");
+    const calendarDayHeader = document.querySelectorAll(".calendar-day");
+    const calendarDayColumns = document.querySelectorAll(".day-column");
     const weekLabels = getWeekDays(startFrom);
 
     dayObject.forEach((el, index) => {
@@ -108,6 +110,24 @@ window.pageInit = function() {
                 // Add the month name as a label
                 dayTextLabel.textContent = monthName;
                 el.appendChild(dayTextLabel);
+            }
+
+            calendarDayHeader[index].classList.remove("today");
+            calendarDayColumns[index].classList.remove("today");
+
+            // ✅ Highlight the current day column
+            const today = new Date();
+            const loopDate = new Date(currentViewDate);
+            loopDate.setDate(loopDate.getDate() + index);
+
+            // Compare day, month, year
+            if (
+                loopDate.getDate() === today.getDate() &&
+                loopDate.getMonth() === today.getMonth() &&
+                loopDate.getFullYear() === today.getFullYear()
+            ) {
+                calendarDayHeader[index].classList.add("today");
+                calendarDayColumns[index].classList.add("today");
             }
         }
      });
