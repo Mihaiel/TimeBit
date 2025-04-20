@@ -5,6 +5,7 @@ window.pageInit = function() {
     /* ________________ SELECTED MONTH AND YEAR LOGIC ________________*/
 
     // Grabs the UI elements
+    const newTimeEntryButton = document.getElementById("new-time-entry");
     const monthSelect = document.getElementById("month-select");
     const yearSelect = document.getElementById("year-select");
     const leftButton = document.getElementById("left-button");
@@ -12,6 +13,7 @@ window.pageInit = function() {
     const todayButton = document.getElementById("today");
 
     // Add event listeners to the UI elements
+    newTimeEntryButton.addEventListener("click", () => newTimeEntry());
     monthSelect.addEventListener("change", handleDateChange);
     yearSelect.addEventListener("change", handleDateChange);
     leftButton.addEventListener("click", () => nextWeek(false));
@@ -163,5 +165,105 @@ window.pageInit = function() {
 
         updateCalendar(updatedMonth, updatedYear, monday);
     }
+
+    // Creates a new Time Entry Pop Up
+    async function newTimeEntry() {
+
+        // Checks if a time entry is already shown
+        if (document.querySelector(".time-entry-container")) {
+            console.warn("⚠️ A time entry popup is already open.");
+            return; // Stop the function
+        }
+
+        const htmlPath = "/components/time-entry/time-entry.html";
+        const cssPath = "/components/time-entry/time-entry.css";
+      
+        // Load CSS
+        if (await fileExists(cssPath)) loadStyle(cssPath);
+      
+        // Load HTML
+        const res = await fetch(htmlPath);
+        const html = await res.text();
+      
+        // Inject into the DOM
+        const mainContent = document.querySelector("main");
+        const wrapper = document.createElement("div");
+        wrapper.innerHTML = html;
+        mainContent.appendChild(wrapper);
+      
+        // Make draggable (optional)
+        makeDraggable(document.querySelector(".time-entry-container"));
+      
+        // Close logic
+        wrapper.querySelector(".close-entry").addEventListener("click", () => {
+          wrapper.remove();
+        });
+      }
+
+
+      // Makes an elemnet draggable (used for the time-entry container)
+      function makeDraggable(element) {
+        let isDown = false;
+        let offset = [0, 0];
+    
+        const header = element.querySelector(".time-entry-header");
+        const container = document.querySelector("main");
+    
+        header.addEventListener("mousedown", (e) => {
+            isDown = true;
+    
+            // Get the element's absolute position on the page
+            const rect = element.getBoundingClientRect();
+            const scrollLeft = window.pageXOffset;
+            const scrollTop = window.pageYOffset;
+    
+            // Freeze its current visual position
+            element.style.left = `${rect.left + scrollLeft}px`;
+            element.style.top = `${rect.top + scrollTop}px`;
+            element.style.transform = "none";
+    
+            // Calculate offset between cursor and top-left corner of the element
+            offset = [
+                (rect.left + scrollLeft) - e.pageX,
+                (rect.top + scrollTop) - e.pageY
+            ];
+    
+            header.style.cursor = "grabbing";
+        });
+    
+        document.addEventListener("mouseup", () => {
+            isDown = false;
+            header.style.cursor = "grab";
+        });
+    
+        document.addEventListener("mousemove", (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+    
+            const scrollLeft = window.pageXOffset;
+            const scrollTop = window.pageYOffset;
+    
+            // New proposed position
+            let newLeft = e.pageX + offset[0];
+            let newTop = e.pageY + offset[1];
+    
+            // Optional bounds clamping (disable if it's locking up)
+            const containerRect = container.getBoundingClientRect();
+            const containerLeft = containerRect.left + scrollLeft;
+            const containerTop = containerRect.top + scrollTop;
+    
+            const maxLeft = containerLeft + container.offsetWidth - element.offsetWidth;
+            const maxTop = containerTop + container.offsetHeight - element.offsetHeight;
+    
+            // Clamp inside container (optional)
+            newLeft = Math.max(containerLeft, Math.min(newLeft, maxLeft));
+            newTop = Math.max(containerTop, Math.min(newTop, maxTop));
+    
+            element.style.left = `${newLeft}px`;
+            element.style.top = `${newTop}px`;
+        });
+    }
+    
+    
 
 };

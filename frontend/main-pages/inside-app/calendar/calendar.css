@@ -13,8 +13,8 @@
 }
 
 .timesheet-header button{
-	padding: 10px;
-	font-size: 20px;
+	padding: 10px 20px 10px 20px;
+	font-size: 15px;
 }
 
 .timesheet-filters{
@@ -27,9 +27,22 @@
 .calendar-container {
 	max-width: 100%;
 	overflow-x: auto;
-	margin-top: 40px;
+	margin-top: 20px;
 	border: 1px solid #ccc;
+	border-radius: 20px;
+	height: calc(100vh - 1rem - 220px); /* adjust if header height changes */
+	display: flex;
+	flex-direction: column;
+}
+
+.calendar-container::-webkit-scrollbar {
+	height: 8px;
+}
+
+.calendar-container::-webkit-scrollbar-thumb {
+	background-color: rgba(0,0,0,0.2);
 	border-radius: 40px;
+	overflow: hidden;
 }
   
 .calendar-header {
@@ -38,6 +51,10 @@
 	background-color: #eaeaea;
 	text-align: center;
 	border-bottom: 1px solid #ccc;
+
+	position: sticky;
+	top: 0;
+	z-index: 5;
 }
 
 .calendar-header div{
@@ -113,7 +130,7 @@
 	border-radius: 4px;
 	width: calc((100% - 80px) / 7 - 10px);
 	margin-left: 5px;
-	z-index: 10;
+	z-index: 3;
 	box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
@@ -152,4 +169,9 @@
 
 .calendar-day.today p{
 	color: white;
+}
+
+.next-week-circle {
+	border-radius: 50%;
+	width: 40px;
 }
