@@ -14,14 +14,51 @@
     height: 500px;
     z-Index: 10;
     transform: translate(-50%, -50%); /* ✅ Centers the popup */
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
 }
 
 .time-entry-container-inside{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     flex-direction: column;
-    height: 85%;
+    height: 88%;
+    width: 90%;
+    gap: 20px;
+}
+
+.entry-block{
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    gap: 10px;
+}
+
+.entry-block p{
+    min-height: 43px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.entry-block svg{
+    padding-top: 12px;
+}
+
+.entry-block select{
+    width: 100%;
+}
+
+textarea{
+    width: 90%;
+}
+
+#date{
+    width: 40%;
 }
 
 .time-entry-header{
@@ -44,7 +81,15 @@
     fill: #A1A1A1;
 }
 
-.close-entry{
-    font-size: 20px;
-    padding: 10px 10px 10px 10px;
+.entry-buttons{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+}
+
+.entry-buttons button{
+    font-size: 15px;
+    padding: 10px;
 }

@@ -28,6 +28,12 @@ window.pageInit = function() {
     const currentYear = new Date().getFullYear();
     yearSelect.value = currentYear.toString();
 
+    getToday();
+    const calendarContainer = document.querySelector('.calendar-container');
+    const hourHeight = 39; // height of one hour block
+    calendarContainer.scrollTop = hourHeight * 7 + 8; // scroll to 9 AM
+    console.log("SCROLLED!!");
+
     // Function to handle month/year change
     function handleDateChange() {
         // Get the select input (choosen month and year)
@@ -39,9 +45,6 @@ window.pageInit = function() {
         updateCalendar(selectedMonth, selectedYear);
     }
 
-    getToday();
-
-    
     // Function that returns the Weekdays
     function getWeekDays(startDate) {
         const week = [];
@@ -136,7 +139,7 @@ window.pageInit = function() {
 
     }
 
-    // Function that is attached to the left and right buttons
+    // Next and previous week function that is added to the left and right buttons
     function nextWeek(right) {
         const delta = right ? 7 : -7;
         currentViewDate.setDate(currentViewDate.getDate() + delta);
@@ -150,6 +153,7 @@ window.pageInit = function() {
         updateCalendar(updatedMonth, updatedYear, currentViewDate);
     }
 
+    // Get's the current day of the system and shows as starting point in calendar
     function getToday() {
         const today = new Date();
         const monday = getMonday(today);
@@ -170,10 +174,7 @@ window.pageInit = function() {
     async function newTimeEntry() {
 
         // Checks if a time entry is already shown
-        if (document.querySelector(".time-entry-container")) {
-            console.warn("⚠️ A time entry popup is already open.");
-            return; // Stop the function
-        }
+        if (document.querySelector(".time-entry-container")) {return; }
 
         const htmlPath = "/components/time-entry/time-entry.html";
         const cssPath = "/components/time-entry/time-entry.css";
@@ -186,7 +187,7 @@ window.pageInit = function() {
         const html = await res.text();
       
         // Inject into the DOM
-        const mainContent = document.querySelector("main");
+        const mainContent = document.querySelector("main #main-content");
         const wrapper = document.createElement("div");
         wrapper.innerHTML = html;
         mainContent.appendChild(wrapper);
@@ -263,7 +264,5 @@ window.pageInit = function() {
             element.style.top = `${newTop}px`;
         });
     }
-    
-    
 
 };

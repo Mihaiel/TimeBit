@@ -519,7 +519,7 @@ li{
 .box {
 	background-color: white;
 	border-radius: 40px;
-	box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+	box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
 .box-content{
@@ -543,6 +543,8 @@ button{
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	font-size: 15px;
+	padding: 10px;
 }
 
 button:hover{
@@ -553,6 +555,16 @@ button:hover{
 
 button:active{
 	transform: scale(0.95);
+}
+
+.button-black{
+	background-color: #313343;
+	color: white;
+}
+
+.button-black:hover{
+	background-color: #3A3A4A !important;
+
 }
 
 /* --------------------------------------- */
@@ -581,8 +593,8 @@ select:hover{
 
 /* --------------------------------------- */
 
-/* ------------ INPUT ------------ */
-input {
+/* ------------ INPUT AND TEXTAREA------------ */
+input, textarea {
 	border-radius: 40px;
 	background-color: var(--white-25-color);
 	color: var(--black-75-color);
@@ -591,6 +603,11 @@ input {
 	padding: 10px 15px 10px 15px;
 	width: auto;
 	font-family: "inter-medium";
+}
+
+textarea {
+	border-radius: 20px;
+	resize: none;
 }
 
 /* --------------------------------------- */

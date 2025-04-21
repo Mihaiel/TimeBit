@@ -36,12 +36,13 @@
 }
 
 .calendar-container::-webkit-scrollbar {
-	height: 8px;
+	width: 0px;
 }
 
 .calendar-container::-webkit-scrollbar-thumb {
 	background-color: rgba(0,0,0,0.2);
-	border-radius: 40px;
+	margin-top: 10px; /* Space between top of container and scrollbar */
+	border-radius: 80px;
 	overflow: hidden;
 }
   
