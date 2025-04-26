@@ -1,1 +1,57 @@
-<p>frontend/main-pages/inside-app/projects/projects.html</p>
+<div class="flexbox">
+    <div class="flexbox-left">
+        <p style="color: var(--primary-color);">new project</p>
+        <h1>Create a new Project</h1>
+        <p>Details</p>
+        <form class="form">
+            <div>
+                <input type="text" placeholder="Project title" name="title">
+            </div>
+            <div>
+                <label for="category">Select Category</label><br>
+            </div>
+            <div>
+                <select id="category" class="input-field">            
+                    <option value="web">TESTWeb Development</option>
+                    <option value="mobile">TESTMobile Development</option>
+                    <option value="data">TESTData Science</option>
+                </select>
+            </div>
+            <div>
+            <textarea style="height: 150px;" placeholder="Project description" name="description"></textarea>
+            </div>
+        </form>
+    </div>
+    <div class="flexbox-right">         
+        <div>
+            <p>Time allocation</p>
+            <form class="form">
+                <div class="miniflexbox">
+                    <label for="weekly-hours">Weekly Hours</label>
+                    <input type="text" id="weekly-hours" class="input-field" placeholder="10" >
+                </div>
+                <div class="miniflexbox">
+                    <label for="start-date">Start Date</label>
+                    <input type="date" id="start-date" class="input-field" min: today()> 
+                </div>
+                <div class="miniflexbox">
+                    <label for="end-date">End Date</label>
+                    <input type="date" id="end-date" class="input-field" min: today()>
+            </form>
+            </div>
+            <p>Settings</p>
+            <form>
+                <label for="file-upload" class="file-upload">Upload a background photo</label>
+                <input type="file" id="file-upload" accept="image/*"  placeholder="Upload background photo"><br>
+                <label>
+                    <input type="checkbox" name = "checkbox" id="checkbox">
+                    Send notifications when a goal is missed or the quota is reached
+                </label>
+            </form>
+            <div class="button-container">
+                <button class="button-black">Back</button>
+                <button class="button">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
