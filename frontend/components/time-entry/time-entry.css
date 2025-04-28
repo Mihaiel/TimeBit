@@ -85,7 +85,7 @@ textarea{
     display: flex;
     justify-content: end;
     align-items: center;
-    width: 100%;
+    width: 90%;
     gap: 20px;
 }
 
