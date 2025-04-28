@@ -1,25 +1,17 @@
-<div class="flexbox">
+<div class="box flexbox">
     <div class="flexbox-left">
-        <p style="color: var(--primary-color);">new project</p>
-        <h1>Create a new Project</h1>
+        <p class="color-primary bold">NEW PROJECT</p>
+        <h2>Create a new Project</h2>
         <p>Details</p>
-        <form class="form">
-            <div>
-                <input type="text" placeholder="Project title" name="title">
-            </div>
-            <div>
-                <label for="category">Select Category</label><br>
-            </div>
-            <div>
-                <select id="category" class="input-field">            
-                    <option value="web">TESTWeb Development</option>
-                    <option value="mobile">TESTMobile Development</option>
-                    <option value="data">TESTData Science</option>
-                </select>
-            </div>
-            <div>
+        <form>
+            <input type="text" placeholder="Project title" name="title">
+            <label for="category">Select Category</label>
+            <select id="category" class="input-field">            
+                <option value="web">TESTWeb Development</option>
+                <option value="mobile">TESTMobile Development</option>
+                <option value="data">TESTData Science</option>
+            </select>
             <textarea style="height: 150px;" placeholder="Project description" name="description"></textarea>
-            </div>
         </form>
     </div>
     <div class="flexbox-right">         
@@ -37,21 +29,21 @@
                 <div class="miniflexbox">
                     <label for="end-date">End Date</label>
                     <input type="date" id="end-date" class="input-field" min: today()>
+                </div>
             </form>
-            </div>
             <p>Settings</p>
             <form>
                 <label for="file-upload" class="file-upload">Upload a background photo</label>
-                <input type="file" id="file-upload" accept="image/*"  placeholder="Upload background photo"><br>
+                <input type="file" id="file-upload" accept="image/*" placeholder="Upload background photo"><br>
                 <label>
                     <input type="checkbox" name = "checkbox" id="checkbox">
                     Send notifications when a goal is missed or the quota is reached
                 </label>
             </form>
+        </div>
             <div class="button-container">
                 <button class="button-black">Back</button>
                 <button class="button">Create</button>
             </div>
-        </div>
     </div>
 </div>
