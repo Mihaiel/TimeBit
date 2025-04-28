@@ -30,9 +30,8 @@ window.pageInit = function() {
 
     getToday();
     const calendarContainer = document.querySelector('.calendar-container');
-    const hourHeight = 39; // height of one hour block
+    const hourHeight = 60; // height of one hour block
     calendarContainer.scrollTop = hourHeight * 7 + 8; // scroll to 9 AM
-    console.log("SCROLLED!!");
 
     // Function to handle month/year change
     function handleDateChange() {
@@ -195,10 +194,15 @@ window.pageInit = function() {
         // Make draggable (optional)
         makeDraggable(document.querySelector(".time-entry-container"));
       
-        // Close logic
+        // Close entry
         wrapper.querySelector(".close-entry").addEventListener("click", () => {
           wrapper.remove();
         });
+
+        // Create an event-block (time-entry) and then close the popUp
+        wrapper.querySelector(".submit-entry").addEventListener("click", () => {
+            wrapper.remove();
+          });
       }
 
 
