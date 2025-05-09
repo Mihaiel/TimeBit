@@ -6,9 +6,13 @@
 
 ***/
 
+nav {
+    margin-right: 250px;
+}
+
 .sidebar {
     width: 250px;
-    height: 100vh;
+    height: 100%;
     background-color: #1E1E1E;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -19,6 +23,52 @@
     top: 0;
     left: 0;
     z-index: 10;
+    transition-duration: 0.3s;
+}
+
+
+/* Toggle button styling */
+.sidebar-toggle {
+    display: none;
+    position: fixed;
+    top: 40px;
+    left: 20px;
+    z-index: 1100;
+    height: 50px;
+    width: 50px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    background-color: #51ABEC;
+    border-radius: 10px;
+}
+
+.sidebar.big{
+    transform: translateX(0);
+    width: 100%;
+}
+
+.burger-line {
+    display: block;
+    width: 20px;
+    margin-top: 4px;
+    height: 4px;
+    background-color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Animation for the burger menu when active */
+.sidebar-toggle.active .burger-line:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.sidebar-toggle.active .burger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.sidebar-toggle.active .burger-line:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
 }
   
 .sidebar-top {
@@ -127,4 +177,27 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* Show toggle on smaller screens */
+@media (max-width: 992px) {
+    .sidebar-toggle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .sidebar{
+        transform: translateX(-100%);
+        border-radius: 0;
+    }
+
+    .sidebar.big{
+        transform: translateX(0);
+        width: 100%;
+    }
+
+    nav {
+        margin-right: 0;
+    }
 }
