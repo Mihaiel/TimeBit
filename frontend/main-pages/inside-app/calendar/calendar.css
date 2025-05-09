@@ -90,7 +90,7 @@
 }
 
 .time-labels div {
-	height: 40px;
+	height: 61px;
 	text-align: center;
 	font-size: 0.85rem;
 	color: #666;
@@ -118,21 +118,31 @@
 }
 
 .time-slot {
-	height: 39px;
+	height: 60px;
 	border-bottom: 1px solid #f0f0f0;
 }
 
 .event-block {
-	position: absolute;
-	background-color: #4a90e2;
+	position: relative;
+	background-color: #51ABEC;
 	color: white;
 	font-size: 0.85rem;
-	padding: 4px 8px;
 	border-radius: 4px;
-	width: calc((100% - 80px) / 7 - 10px);
-	margin-left: 5px;
+	width: 100%;
 	z-index: 3;
 	box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+	display: flex;
+	justify-content: start;
+	align-items: start;
+	flex-direction: column;
+	min-height: 10px;
+}
+
+.event-block p{
+	color: white;
+	margin-top: 2px;
+	margin-left: 8px;
+	font-size: 0.85rem;
 }
 
 .left-right-container{
