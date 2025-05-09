@@ -4,7 +4,7 @@
 window.addEventListener("DOMContentLoaded", () => {
     loadAdminSidebar();
     loadHeader();
-    safeLoadPage("projects", true);
+    safeLoadPage("calendar", true);
 });
 
 /**
