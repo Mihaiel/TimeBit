@@ -21,18 +21,21 @@ async function loadSidebar() {
     const nav = document.querySelector("nav");
     nav.innerHTML = html;
 
-    // Adjust the padding of the <nav> element to create space for the sidebar
-    nav.style.paddingRight = "250px";
-
     // Load the sidebar CSS
     loadStyle("/components/sidebar/sidebar.css");
+    loadScript("/components/sidebar/sidebar.js")
 
     // Attach event listeners to sidebar buttons
+    // Attach event listeners to sidebar buttons for admin navigation
     document.querySelectorAll(".sidebar-button-container").forEach(link => {
       link.addEventListener("click", (e) => {
         const page = e.currentTarget.dataset.page;  // Get the target page from the data attribute
 
-        selectElement(e.currentTarget);             // Highlight the clicked element
+        // Change the header title based on the page
+        const content_title = document.querySelector(".header h1");
+        content_title.innerHTML = page.toUpperCase();
+
+        selectElement(e.currentTarget);  // Highlight the clicked element
 
         // Load the page either from the inside-app or outside-app folder based on the page
         if (page === "login" || page === "register") {
@@ -61,11 +64,9 @@ async function loadAdminSidebar() {
     const nav = document.querySelector("nav");
     nav.innerHTML = html;
 
-    // Adjust the padding of the <nav> element to create space for the admin sidebar
-    nav.style.paddingRight = "250px";
-
     // Load the admin sidebar CSS
     loadStyle("/components/sidebar-admin/sidebar-admin.css");
+    loadScript("/components/sidebar-admin/sidebar-admin.js");
 
     // Attach event listeners to sidebar buttons for admin navigation
     document.querySelectorAll(".sidebar-button-container").forEach(link => {
