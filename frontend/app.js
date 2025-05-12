@@ -2,9 +2,10 @@
 
 // Wait until the DOM is fully loaded to execute scripts
 window.addEventListener("DOMContentLoaded", () => {
-    loadAdminSidebar();
-    loadHeader();
-    safeLoadPage("calendar", true);
+    if (!checkAuth()){
+      return;
+    }
+    loadMainScreen();
 });
 
 /**
@@ -117,19 +118,29 @@ function selectElement(clickedElement) {
  */
 async function loadHeader() {
   try {
-    const path = `/components/header/header.html`;
+      const path = `/components/header/header.html`;
 
-    // Fetch the header HTML
-    const res = await fetch(path);
-    const html = await res.text();
+      // Fetch the header HTML
+      const res = await fetch(path);
+      const html = await res.text();
 
-    // Inject the header HTML into the <main> element
-    document.querySelector("main aside").innerHTML = html;
+      // Inject the header HTML into the <main> element
+      document.querySelector("main aside").innerHTML = html;
 
-    // Load the header style
-    loadStyle(`${path.replace(".html", ".css")}`);
+      // Load the header style
+      loadStyle(`${path.replace(".html", ".css")}`);
+
+      // Retrieve the logged-in user's information from localStorage
+      const user = JSON.parse(localStorage.getItem("token"));
+
+      if (user) {
+          // Update the header with the logged-in user's name
+          const userNameElement = document.querySelector(".header .user-header h2.base");
+          userNameElement.textContent = `${user.first_name} ${user.last_name}`;
+      }
+
   } catch (error) {
-    console.error("❌ Failed to load HEADER:", error);
+      console.error("❌ Failed to load HEADER:", error);
   }
 }
 
@@ -220,4 +231,64 @@ async function safeLoadPage(page, inside = true) {
   } catch (err) {
     console.error(`❌ Failed to load page "${page}":`, err.message);  // Log any errors
   }
+}
+
+async function safeUnloadPage(page, inside = true) {
+  try {
+    const baseDir = inside ? "inside-app" : "outside-app";
+    const basePath = `/main-pages/${baseDir}/${page}/${page}`;
+
+    // Step 1: Clear the main and nav content
+    document.querySelector("aside").innerHTML = "";
+    document.querySelector("nav").innerHTML = "";
+
+    // Step 2: Remove dynamically loaded CSS
+    const cssHref = `${basePath}.css`;
+    document.querySelectorAll(`link[rel="stylesheet"]`).forEach(link => {
+      if (link.href.includes(cssHref)) {
+        link.remove();
+      }
+    });
+
+    // Step 3: Remove dynamically loaded script tags
+    const jsSrc = `${basePath}.js`;
+    document.querySelectorAll(`script`).forEach(script => {
+      if (script.src.includes(jsSrc)) {
+        script.remove();
+      }
+    });
+
+  } catch (err) {
+    console.error(`❌ Failed to unload page "${page}":`, err.message);
+  }
+}
+
+
+// Function to load the main screen after successful login
+async function loadMainScreen() {
+  const token = localStorage.getItem('token');
+  if (token) {
+      try {
+          // Load the sidebar and header with user information
+          await loadSidebar();
+          await loadHeader();
+          safeLoadPage("calendar", true);
+      } catch (error) {
+          console.error('Error loading main screen:', error);
+          localStorage.clear(); // Clear invalid tokens
+          safeLoadPage("login", false);
+      }
+  } else {
+      // No token found, redirect to login
+      safeLoadPage("login", false);
+  }
+}
+
+function checkAuth() {
+  const token = localStorage.getItem('token');
+  if (!token) {
+      safeLoadPage("login", false);
+      return false;
+  }
+  return true;
 }

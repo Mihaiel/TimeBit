@@ -10,35 +10,22 @@
 
     </div>
     <div class="box-content">
-      <form class="login-form" action="/api/login" method="POST">
+      <form class="login-form">
         <input name="email" type="email" placeholder="E-Mail*" required>
         <input name="password" type="password" placeholder="Password*" required>
-        <p class="forgot-password s-2"><a href="#">Forgot password?</a></p>
+        <p class="forgot-password s-1"><a href="#">Forgot password?</a></p>
         <button type="submit" class="login-button">Login</button>
       </form>
-
       
-
-      <p class="signup-text s-2">Don't have an account? <a href="../register/register.html" class="color-primary">Sign up</a></p>
+      <p class="signup-text s-1">Don't have an account? <a class="color-primary" id="sign-up">Sign up</a></p>
 
       <div class="divider"><span>OR</span></div>
 
-      <a href="#" class="google-link">
+      <a class="google-link">
         <div class="google-button">
-          <!-- Farbiges Google-SVG ???-->
-          <svg
-            class="google-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 46 46"
-            role="img"
-            aria-label="Google logo"
-          >
-            <path fill="#EA4335" d="M23 23v9.5h12.6…"/>
-            <path fill="#4285F4" d="M46 23.2c0-1.6…"/>
-            <path fill="#FBBC05" d="M12.6 27.3…"/>
-            <path fill="#34A853" d="M23 46c-6.6…"/>
-          </svg>
           <span>Login with Google</span>
         </div>
       </a>
+    </div>
+</div>
       
