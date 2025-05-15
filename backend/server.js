@@ -7,8 +7,8 @@ import { fileURLToPath } from "url";
 
 // 🔌 Import API routes
 import timeRoutes from "./routes/timeRoutes.js";
-import dashboardRoutes from "./routes/dashboardRoutes.js";
 import authRoutes from "./routes/authRoutes.js"
+import legalRoutes from './routes/legal.js';
 
 // 🛠️ Import and run the DB connection (for initial connection test)
 import "./config/database.js";
@@ -22,10 +22,10 @@ const app = express();
 const port = 3000;
 
 // 🔀 Mount API routes
-app.use(express.json()); // This line is important
+app.use(express.json());
 app.use("/time", timeRoutes);
-app.use("/dashboard", dashboardRoutes);
 app.use('/auth', authRoutes);
+app.use('/legal', legalRoutes);
 
 // 🌐 Serve frontend static files (HTML, CSS, JS)
 // Any request to localhost will serve files from /frontend folder

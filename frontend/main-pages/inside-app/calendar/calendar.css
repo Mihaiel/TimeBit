@@ -25,7 +25,7 @@
 }
   
 .calendar-container {
-	max-width: 100%;
+	width: auto;
 	overflow-x: auto;
 	margin-top: 20px;
 	border: 1px solid #ccc;
@@ -52,7 +52,6 @@
 	background-color: #eaeaea;
 	text-align: center;
 	border-bottom: 1px solid #ccc;
-
 	position: sticky;
 	top: 0;
 	z-index: 5;

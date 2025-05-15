@@ -12,6 +12,14 @@
     align-items: center;
     flex-direction: row;
     width: 100%;
+    gap: 32px;
+}
+
+.header-left-side{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
 }
 
 .user-header{
@@ -33,4 +41,60 @@
 
 .user-header svg:active{
     transform: scale(0.95);
+}
+
+/* Toggle button styling */
+.sidebar-toggle {
+    z-index: 1100;
+    min-height: 50px;
+    min-width: 50px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    background-color: #51ABEC;
+    border-radius: 10px;
+}
+
+.sidebar.big{
+    transform: translateX(0);
+    width: 100%;
+}
+
+.burger-line {
+    display: block;
+    width: 20px;
+    margin-top: 4px;
+    height: 4px;
+    background-color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Animation for the burger menu when active */
+.sidebar-toggle.active .burger-line:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.sidebar-toggle.active .burger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.sidebar-toggle.active .burger-line:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Change header on smaller screens */
+
+@media (max-width: 768px) {
+    .header h1{
+        display: none;
+    }
+
+    .header{
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 992px) {
+
 }

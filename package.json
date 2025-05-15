@@ -29,5 +29,6 @@
   "bugs": {
     "url": "https://github.com/Mihaiel/TimeBit/issues"
   },
-  "homepage": "https://github.com/Mihaiel/TimeBit#readme"
+  "homepage": "https://github.com/Mihaiel/TimeBit#readme",
+  "type": "module"
 }

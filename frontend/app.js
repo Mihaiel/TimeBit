@@ -24,7 +24,7 @@ async function loadSidebar() {
 
     // Load the sidebar CSS
     loadStyle("/components/sidebar/sidebar.css");
-    loadScript("/components/sidebar/sidebar.js")
+    loadScript("/components/sidebar/sidebar.js");
 
     // Attach event listeners to sidebar buttons
     // Attach event listeners to sidebar buttons for admin navigation
@@ -128,7 +128,8 @@ async function loadHeader() {
       document.querySelector("main aside").innerHTML = html;
 
       // Load the header style
-      loadStyle(`${path.replace(".html", ".css")}`);
+      loadStyle("/components/header/header.css");
+      loadScript("/components/header/header.js");
 
       // Retrieve the logged-in user's information from localStorage
       const user = JSON.parse(localStorage.getItem("token"));
@@ -272,7 +273,7 @@ async function loadMainScreen() {
           // Load the sidebar and header with user information
           await loadSidebar();
           await loadHeader();
-          safeLoadPage("calendar", true);
+          safeLoadPage("settings", true);
       } catch (error) {
           console.error('Error loading main screen:', error);
           localStorage.clear(); // Clear invalid tokens

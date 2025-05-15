@@ -5,4 +5,3 @@ export const getTimeEntries = (req, res) => {
     ];
     res.json(fakeData);
   };
-  
