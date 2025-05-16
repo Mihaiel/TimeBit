@@ -4,15 +4,6 @@
   margin: 0 auto 3rem;
 }
 
-.projects-container p,
-.finishedprojects p {
-  font-weight: 600;
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
 /* Grid layout for articles */
 #ongoing-projects,
 #finished-projects {
