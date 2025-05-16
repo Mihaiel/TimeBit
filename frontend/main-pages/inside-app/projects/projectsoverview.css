@@ -1,0 +1,131 @@
+.projects-container,
+.finishedprojects {
+  max-width: 1200px;
+  margin: 0 auto 3rem;
+}
+
+.projects-container p,
+.finishedprojects p {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Grid layout for articles */
+#ongoing-projects,
+#finished-projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+/* Project card styles */
+.project-card {
+  background: #f0f0f0;
+  border-radius: 1rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+  transition: box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.project-card .project-image {
+  width: 100%;
+  height: auto;
+  border-radius: 1rem;
+  object-fit: cover;
+}
+
+.project-card .project-title {
+  margin-top: 0.7rem;
+  font-weight: 700;
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* Finished projects special style */
+.project-card.finished {
+  background: #007bff;
+  color: white;
+}
+
+/* Create New Project card */
+.project-card.create-new {
+  background: #fafafa;
+  border: 2px dashed #bbb;
+  color: #777;
+  cursor: pointer;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.project-card.create-new:hover {
+  background-color: #e6e6e6;
+  color: #444;
+}
+
+.project-card.create-new .plus {
+  font-size: 3rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  user-select: none;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  #ongoing-projects,
+  #finished-projects {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+
+  .project-card {
+    padding: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #ongoing-projects,
+  #finished-projects {
+    grid-template-columns: 1fr;  /* One column layout */
+    gap: 0.8rem;
+  }
+
+  .project-card {
+    aspect-ratio: auto;         /* Let height adjust naturally */
+    width: 100%;                /* Full width cards */
+    padding: 1rem 0.5rem;
+  }
+
+  .project-card .project-image {
+    border-radius: 0.75rem;
+    width: 100%;
+    height: auto;
+  }
+
+  .project-card .project-title {
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+  }
+
+  .project-card.create-new {
+    font-size: 1.2rem;
+    padding: 1.5rem 0.5rem;
+  }
+
+  .project-card.create-new .plus {
+    font-size: 4rem;
+  }
+}
