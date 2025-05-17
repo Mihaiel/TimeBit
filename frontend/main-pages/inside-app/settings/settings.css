@@ -5,3 +5,180 @@
 ====================================================================
 
 ***/
+
+/* Section titles */
+.settings h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--black-50-color);
+  padding-bottom: 8px;
+}
+
+/* Image buttons row */
+.image-options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.image-options h6 {
+  order: 2;
+  flex: 0 0 100%;     
+  margin: 10px 0 0;   /* small gap above */
+  text-align: left;
+}
+
+.avatar-placeholder {
+  position: relative;
+  flex: 0 0 auto;           /* don’t stretch */
+  width: 80px;               /* circle diameter */
+  height: 80px;
+  border-radius: 50%;        /* circle */
+  background: var(--white-25-color);
+  border: 2px solid var(--black-50-color);
+  margin-right: 10px;        /* gap to buttons */
+}
+
+.avatar-edit {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translate(25%, 25%);
+  border: none;
+  background: var(--primary-color);
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Name fields */
+.name-Settings {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;                       
+  gap: 20px;
+  margin-bottom: 10px;
+}
+
+.name-Settings .first-name,
+.name-Settings .last-name {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.name-Settings .save-discard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.settings input[disabled] {
+  max-width: 350px;   
+  width: 100%;
+}
+
+/* Save / Discard row */
+.save-discard {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+
+/* Account security fields */
+.account-security .email,
+.account-security .password {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.account-security .change-email,
+.account-security .change-password {
+  position: absolute;
+  right: 0;
+  top: 32px;   /* adjust to sit below the input’s top padding */
+}
+
+/* Labels */
+.settings label {
+  font-size: 14px;
+  font-weight: 600;
+  display: block;       
+  margin-bottom: 8px;
+}
+
+/* Buttons */
+.settings button {
+  padding: 10px 20px;
+  border-radius: 24px;
+  font-size: 14px;
+}
+
+.settings .remove-image,
+.settings .discard,
+.settings .change-email,
+.settings .change-password,
+.settings .delete-account-button {
+  background: var(--black-color);
+}
+
+.settings .change-email,
+.settings .change-password,
+.settings .delete-account-button {
+  display: flex;
+  justify-content: flex-end;  
+}
+
+/* Delete account section */
+.delete-account {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 40px;
+}
+
+.delete-account p {
+  font-size: 14px;
+  font-weight: 600;
+  color: #D42F2F;
+}
+
+.delete-account p,
+.delete-account small {
+  display: block;   /* keeps them together */
+  max-width: 60%;
+  width: calc(100% - 160px);
+  text-align: left; 
+  margin: 0;
+}
+
+.delete-account small {
+  font-size: 12px;
+  color: var(--black-75-color);
+}
+
+.delete-account-button {
+  flex-shrink: 0;             /* doesnt’t let button shrink */
+}
+
+
