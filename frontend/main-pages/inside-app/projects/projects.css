@@ -5,9 +5,6 @@
 ====================================================================
 
 ***/
-body {
-	overflow-x: hidden; /* Prevent horizontal scrolling */
-}
 
 .flexbox {
 	display: flex;
@@ -57,23 +54,6 @@ body {
 		height: auto;
 	}
 }
-
-/* The flexbox will stack vertically on phone screens */
-/*scrolling will be enabled on the flexbox */
-@media (max-width: 480px) {
-	.flexbox-left,
-	.flexbox-right {
-		width: auto;
-	}
-
-	.flexbox {
-		flex-direction: column;
-		max-height: none;
-		height: auto;
-		overflow-y: auto;
-		overflow-x: hidden;
-	}
-}
   
 .miniflexbox {
 	display: flex;
@@ -100,4 +80,46 @@ form {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
+}
+
+.project-type-tag{
+	background-color: var(--primary-color);
+	color: white !important;
+	border-radius: 20px;
+	padding: 5px 10px 5px 10px;
+}
+
+.notifications-checkbox-container{
+	display: flex;
+	gap: 10px;
+	align-items: start;
+}
+
+.notifications-checkbox-container input{
+	margin-top: 4px;
+}
+
+
+/* RESPONSIVENESS - SMALLER SCREENS */
+@media (max-width: 480px) {
+	.flexbox-left,
+	.flexbox-right {
+		width: auto;
+	}
+
+	.flexbox {
+		flex-direction: column;
+		max-height: none;
+		height: auto;
+		overflow-y: auto;
+		overflow-x: hidden;
+	}
+}
+
+@media (max-width: 768px) {
+
+}
+
+@media (max-width: 992px) {
+
 }

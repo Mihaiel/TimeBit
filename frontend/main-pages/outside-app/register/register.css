@@ -75,3 +75,16 @@
   align-items: center;
   gap: 10px;
 }
+
+/* RESPONSIVENESS - SMALLER SCREENS */
+@media (max-width: 480px) {
+
+}
+
+@media (max-width: 768px) {
+
+}
+
+@media (max-width: 992px) {
+
+}

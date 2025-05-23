@@ -1,0 +1,61 @@
+/*** 
+
+====================================================================
+	PROJECTS OVERVIEW STYLING
+====================================================================
+
+***/
+
+.project-type-container{
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.project-container{
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.project{
+  border-radius: 20px;
+  border: solid 1p grey;
+  width: 200px;
+  height: 200px;
+  background-color: #F2F2F2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.new-project::after{
+  content: "+";
+  font-size: 64px;
+  color: #A1A1A1;
+}
+
+/* RESPONSIVENESS - SMALLER SCREENS */
+@media (max-width: 480px) {
+  .project-type-container{
+    text-align: center;
+  }
+  
+  .project{
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .project-container{
+    justify-content: center;
+    align-items: center;
+  }
+
+}
+
+@media (max-width: 992px) {
+
+}

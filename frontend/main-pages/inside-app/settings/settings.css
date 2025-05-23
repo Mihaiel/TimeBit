@@ -193,3 +193,16 @@
 .delete-account-button{
   flex-shrink: 0;
 }
+
+/* RESPONSIVENESS - SMALLER SCREENS */
+@media (max-width: 480px) {
+
+}
+
+@media (max-width: 768px) {
+
+}
+
+@media (max-width: 992px) {
+
+}

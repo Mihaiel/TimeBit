@@ -1,22 +1,21 @@
 <div class="box flexbox">
     <div class="flexbox-left">
-        <p class="color-primary bold">NEW PROJECT</p>
+        <p class="color-primary bold project-type-tag">NEW PROJECT</p>
         <h2>Create a new Project</h2>
-        <p>Details</p>
+        <p class="bold color-b-75">Details</p>
         <form>
             <input type="text" placeholder="Project title" name="title">
-            <label for="category">Select Category</label>
             <select id="category" class="input-field">            
-                <option value="web">TESTWeb Development</option>
-                <option value="mobile">TESTMobile Development</option>
-                <option value="data">TESTData Science</option>
+                <option value="web">Web Development</option>
+                <option value="mobile">Mobile Development</option>
+                <option value="data">Data Science</option>
             </select>
             <textarea style="height: 150px;" placeholder="Project description" name="description"></textarea>
         </form>
     </div>
     <div class="flexbox-right">         
         <div>
-            <p>Time allocation</p><br>
+            <p class="bold color-b-75">Time Allocation</p><br>
             <form class="form">
                 <div>
                     <div class="miniflexbox">
@@ -33,13 +32,13 @@
                     </div>
                 </div>
             </form>
-            <p>Settings</p><br>
+            <p class="bold color-b-75">Settings</p><br>
             <form>
-                <label for="file-upload" class="file-upload">Upload Project Photo</label>
-                <input type="file" id="file-upload" accept="image/*"><br>
-                <label>
+                <label for="file-upload" class="file-upload">Upload a project photo</label>
+                <input type="file" id="file-upload" accept="image/*">
+                <label class="notifications-checkbox-container">
                     <input type="checkbox" name = "checkbox" id="checkbox">
-                    Send notifications when a goal is missed or the quota is reached
+                    <p>Enable notifications if goal is missed or the quota has been reached</p>
                 </label>
             </form>
         </div>
