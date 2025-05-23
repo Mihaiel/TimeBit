@@ -27,7 +27,6 @@ async function loadSidebar() {
     loadScript("/components/sidebar/sidebar.js");
 
     // Attach event listeners to sidebar buttons
-    // Attach event listeners to sidebar buttons for admin navigation
     document.querySelectorAll(".sidebar-button-container").forEach(link => {
       link.addEventListener("click", (e) => {
         const page = e.currentTarget.dataset.page;  // Get the target page from the data attribute
@@ -107,6 +106,10 @@ async function loadAdminSidebar() {
 function selectElement(clickedElement) {
   // Remove 'nav-selected' class from all elements
   document.querySelectorAll(".sidebar-button-container.nav-selected")
+    .forEach(el => el.classList.remove("nav-selected"));
+
+  // Sidebar settings button selected style removal
+  document.querySelectorAll(".settings-button.nav-selected")
     .forEach(el => el.classList.remove("nav-selected"));
 
   // Add 'nav-selected' class to the clicked element
@@ -273,7 +276,7 @@ async function loadMainScreen() {
           // Load the sidebar and header with user information
           await loadSidebar();
           await loadHeader();
-          safeLoadPage("projectsoverview", true);
+          safeLoadPage("settings", true);
       } catch (error) {
           console.error('Error loading main screen:', error);
           localStorage.clear(); // Clear invalid tokens

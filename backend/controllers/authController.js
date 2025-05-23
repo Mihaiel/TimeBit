@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import User from '../models/user.js';
 import { validateUserInput } from '../utils/validateUserInput.js';
 import { config } from '../config/env.js';
+import { OAuth2Client } from 'google-auth-library';
 
 const normalizeEmail = (email) => email.trim().toLowerCase();
 
@@ -129,6 +130,75 @@ export const logout = async (req, res) => {
         return res.status(500).json({ 
             success: false, 
             message: 'Error during logout' 
+        });
+    }
+};
+
+// GET GOOGLE CLIENT ID
+export const getGoogleClientId = (req, res) => {
+    res.json({ clientId: config.googleClientId });
+};
+
+// GOOGLE AUTH
+export const googleAuth = async (req, res) => {
+    const { token } = req.body;
+    const client = new OAuth2Client(config.googleClientId);
+
+    try {
+        const ticket = await client.verifyIdToken({
+            idToken: token,
+            audience: config.googleClientId
+        });
+
+        const payload = ticket.getPayload();
+        const { email, given_name: first_name, family_name: last_name, picture } = payload;
+        const normalizedEmail = normalizeEmail(email);
+
+        // Check if user exists
+        let user = await User.findOne({ where: { email: normalizedEmail } });
+
+        if (!user) {
+            // Create new user if doesn't exist
+            user = await User.create({
+                email: normalizedEmail,
+                first_name,
+                last_name,
+                password: await bcrypt.hash(Math.random().toString(36), 10), // Random password for Google users
+                profile_picture: picture
+            });
+        }
+
+        // Generate access token
+        const accessToken = jwt.sign(
+            { userId: user.id },
+            config.jwtSecret,
+            { expiresIn: '24h' }
+        );
+
+        // Generate refresh token
+        const refreshToken = jwt.sign(
+            { userId: user.id },
+            config.jwtSecret,
+            { expiresIn: '7d' }
+        );
+
+        return res.json({
+            success: true,
+            token: accessToken,
+            refreshToken,
+            user: {
+                id: user.id,
+                email: user.email,
+                firstName: user.first_name,
+                lastName: user.last_name,
+                profilePicture: user.profile_picture
+            }
+        });
+    } catch (error) {
+        console.error('Google auth error:', error);
+        return res.status(401).json({
+            success: false,
+            message: 'Google authentication failed'
         });
     }
 };

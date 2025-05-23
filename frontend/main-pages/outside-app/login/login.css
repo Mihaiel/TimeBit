@@ -93,38 +93,3 @@
 	padding: 0 8px;
 	color: var(--black-75-color);
   }
-  
-  /* Google-Button */
-.google-button .google-icon {
-	width: 20px;
-	height: 20px;
-	flex-shrink: 0;
-  }
-  
-  /* Text neben dem Icon */
-  .google-button span {
-	font-size: 15px;
-	color: var(--black-75-color);
-  }
-  
-  /* Der bestehende Google-Button */
-  .google-button {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 8px;
-	width: 100%;
-	padding: 12px 0;
-	border: none;
-	border-radius: 24px;
-	background: var(--white-25-color);
-	cursor: pointer;
-  }
-  
-  .google-button:hover {
-	background: var(--black-50-color);
-  }
-  .google-button:hover span {
-	color: white;
-  }
-  

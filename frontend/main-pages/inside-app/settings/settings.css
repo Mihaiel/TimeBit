@@ -45,7 +45,6 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  transform: translate(25%, 25%);
   border: none;
   background: var(--primary-color);
   color: white;
@@ -60,7 +59,7 @@
 }
 
 /* Name fields */
-.name-Settings {
+.name-settings {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;                       
@@ -68,8 +67,8 @@
   margin-bottom: 10px;
 }
 
-.name-Settings .first-name,
-.name-Settings .last-name {
+.name-settings .first-name,
+.name-settings .last-name {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -77,7 +76,7 @@
   flex: 1;
 }
 
-.name-Settings .save-discard {
+.name-settings .save-discard {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -87,8 +86,10 @@
 }
 
 .settings input[disabled] {
-  max-width: 350px;   
-  width: 100%;
+  width: 90%;
+  min-width: 100px;
+  max-width: 350px;
+  overflow: hidden;
 }
 
 /* Save / Discard row */
@@ -150,7 +151,6 @@
 /* Delete account section */
 .delete-account {
   display: flex;
-  flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
   gap: 8px;
@@ -166,8 +166,6 @@
 .delete-account p,
 .delete-account small {
   display: block;   /* keeps them together */
-  max-width: 60%;
-  width: calc(100% - 160px);
   text-align: left; 
   margin: 0;
 }
@@ -177,8 +175,21 @@
   color: var(--black-75-color);
 }
 
-.delete-account-button {
-  flex-shrink: 0;             /* doesnt’t let button shrink */
+.image-editor{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
+.delete-account-info{
+  width: 100%;
+  max-width: 400px;
+  min-width: 80px;
+  flex-shrink: 1;
+}
 
+.delete-account-button{
+  flex-shrink: 0;
+}

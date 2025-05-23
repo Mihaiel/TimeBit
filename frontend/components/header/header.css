@@ -85,16 +85,22 @@
 
 /* Change header on smaller screens */
 
+@media (max-width: 480px) {
+  .user-header svg{
+        display: none;
+    }
+}
+
 @media (max-width: 768px) {
     .header h1{
+        display: none;
+    }
+
+    .user-header h2{
         display: none;
     }
 
     .header{
         justify-content: space-between;
     }
-}
-
-@media (max-width: 992px) {
-
 }
