@@ -232,6 +232,8 @@ async function safeLoadPage(page, inside = true) {
       loadScript(`${basePath}.js`);
     }
 
+    hideSidebar();
+
   } catch (err) {
     console.error(`❌ Failed to load page "${page}":`, err.message);  // Log any errors
   }
@@ -276,7 +278,7 @@ async function loadMainScreen() {
           // Load the sidebar and header with user information
           await loadSidebar();
           await loadHeader();
-          safeLoadPage("projects-overview", true);
+          safeLoadPage("settings", true);
       } catch (error) {
           console.error('Error loading main screen:', error);
           localStorage.clear(); // Clear invalid tokens
@@ -296,3 +298,13 @@ function checkAuth() {
   }
   return true;
 }
+
+  function hideSidebar(){
+    const toggleButton = document.querySelector('.sidebar-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    const settingsButtonHeader = document.querySelector('.header-settings-button');
+
+    sidebar.classList.remove('big');
+    toggleButton.classList.remove('active');
+    toggleButton.style.display = none;
+  }

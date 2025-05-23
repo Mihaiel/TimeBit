@@ -41,13 +41,7 @@ window.pageInit = function() {
         }
 
         selectElement(e.currentTarget); // Highlight the clicked element
-
-        // Load the page either from the inside-app or outside-app folder based on the page
-        if (page === "login" || page === "register") {
-          safeLoadPage(page, false);
-        } else {
-          safeLoadPage(page, true);
-        }
+        safeLoadPage(page, true); // Load the corresponding page
       });
     }
 };

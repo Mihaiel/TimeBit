@@ -1,3 +1,4 @@
+
 window.pageInit = function () {
     const toggleButton = document.querySelector('.sidebar-toggle');
     const sidebar = document.querySelector('.sidebar');
@@ -17,6 +18,13 @@ window.pageInit = function () {
         } else {
             toggleButton.style.display = '';
         }
+    }
+
+    function hideSidebar(){
+        sidebar.classList.remove('big');
+        toggleButton.classList.remove('active');
+        toggleButton.style.display = '';
+        console.log("IT SHOULD BE GONE");
     }
 
     // Call once on load
@@ -42,13 +50,7 @@ window.pageInit = function () {
         }
 
         selectElement(settingsButton); // Highlight the clicked element
-
-        // Load the page either from the inside-app or outside-app folder based on the page
-        if (page === "login" || page === "register") {
-          safeLoadPage(page, false);
-        } else {
-          safeLoadPage(page, true);
-        }
+        safeLoadPage(page, true);
       });
     }
 };
