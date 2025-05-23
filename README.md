@@ -1,6 +1,6 @@
 # TimeBit
 
-TimeBit is a modern time tracking and project management application that helps teams and individuals manage their time effectively and track project progress.
+TimeBit is a modern time tracking and project management application that helps teams and individuals manage their time effectively and track projects or hobbies effectively. Developed as a group project at **the University of Applied Sciences FH Campus Wien**, our goal is to be a simple, lightweight, and user-friendly solution for tracking time and staying organized.
 
 ## Features
 
@@ -74,5 +74,5 @@ This project is licensed under the GNU Affero General Public License v3.0 - see 
 
 ## Acknowledgments
 
-- Thanks to my colleagues who have helped shape this project
-- Special thanks to the open-source community for their invaluable tools and libraries
+- Thanks to my colleagues who have contributed and helped shape this project
+- Special thanks to the open-source community for their time, tools and libraries
