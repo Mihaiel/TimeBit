@@ -1,3 +1,6 @@
+import { loadPage } from '../../../utils/contentLoader.js';
+import { loadMainScreen } from '../../../app.js';
+
 function waitForGoogle(callback) {
     if (window.google && window.google.accounts && window.google.accounts.id) {
         callback();
@@ -17,7 +20,7 @@ window.pageInit = async function () {
 
     // Switch to register
     if (signUp) {
-        signUp.addEventListener("click", () => safeLoadPage("register", false));
+        signUp.addEventListener("click", () => loadPage("register", false));
     }
 
     // Regular login

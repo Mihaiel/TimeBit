@@ -1,3 +1,5 @@
+import { fileExists, loadStyle } from "../../../utils/domUtils.js";
+
 window.pageInit = function() {
     const days = ["Sun.", "Mon.", "Tue.", "Wed.", "Thu.", "Fri.", "Sat."];
     let currentViewDate = getMonday(new Date()); // keeps track of the start of the current week

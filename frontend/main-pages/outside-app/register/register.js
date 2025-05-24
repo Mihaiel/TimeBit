@@ -1,10 +1,13 @@
+import { loadPage } from '../../../utils/contentLoader.js';
+import { loadMainScreen } from '../../../app.js';
+
 window.pageInit = function() {
     // Buttons
     const registerBack = document.getElementById("register-back");
     const registerForm = document.querySelector(".register-form");
 
     // Add event listener for the 'Back' button
-    registerBack.addEventListener("click", () => safeLoadPage("login", false));
+    registerBack.addEventListener("click", () => location.reload());
 
     // Add event listener for the form submission
     registerForm.addEventListener("submit", async (event) => {
@@ -36,10 +39,10 @@ window.pageInit = function() {
             const result = await response.json();
 
             if (response.ok) {
-                // If registration is successful, you can display a success message or redirect the user
+                // If registration is successful, display a success message
                 alert("Registration successful!");
-                // You can optionally redirect to login page
-                safeLoadPage("login", false);
+                // Refresh the page or redirect to login
+                location.reload()
             } else {
                 // If registration fails, display the error message
                 alert(result.message || "Something went wrong during registration.");

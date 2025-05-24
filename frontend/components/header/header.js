@@ -1,3 +1,6 @@
+import { hideSidebar } from "../../utils/componentLoader.js";
+import { loadPage } from "../../utils/contentLoader.js";
+import { selectElement } from "../../utils/domUtils.js";
 
 window.pageInit = function () {
     const toggleButton = document.querySelector('.sidebar-toggle');
@@ -18,13 +21,6 @@ window.pageInit = function () {
         } else {
             toggleButton.style.display = '';
         }
-    }
-
-    function hideSidebar(){
-        sidebar.classList.remove('big');
-        toggleButton.classList.remove('active');
-        toggleButton.style.display = '';
-        console.log("IT SHOULD BE GONE");
     }
 
     // Call once on load
@@ -50,7 +46,8 @@ window.pageInit = function () {
         }
 
         selectElement(settingsButton); // Highlight the clicked element
-        safeLoadPage(page, true);
+        loadPage(page);
+        hideSidebar();
       });
     }
 };

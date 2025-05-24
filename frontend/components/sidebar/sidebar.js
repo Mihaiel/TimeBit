@@ -1,3 +1,7 @@
+import { loadPage } from '../../utils/contentLoader.js';
+import { selectElement } from '../../utils/domUtils.js';
+import { hideSidebar } from '../../utils/componentLoader.js';
+
 window.pageInit = function() {
     const logoutButton = document.querySelector('.logout-button');
     const settingsButton = document.querySelector(".settings-button");
@@ -25,7 +29,8 @@ window.pageInit = function() {
                 console.error('Error during logout:', error);
                 // Even if there's an error, clear local storage and redirect
                 localStorage.clear();
-                safeLoadPage("login", false);
+                loadPage("login", false);
+                hideSidebar();
             }
         });
     }
@@ -41,7 +46,8 @@ window.pageInit = function() {
         }
 
         selectElement(e.currentTarget); // Highlight the clicked element
-        safeLoadPage(page, true); // Load the corresponding page
+        loadPage(page, true); // Load the corresponding page
+        hideSidebar();
       });
     }
 };

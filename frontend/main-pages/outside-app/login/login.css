@@ -95,6 +95,6 @@
   }
 
   /* Google Button */
-  .nsm7Bb-HzV7m-LgbsSe{
-	border-radius: 20px;
-  }
+  #google-signin .nsm7Bb-HzV7m-LgbsSe {
+  	border-radius: 20px !important;
+}

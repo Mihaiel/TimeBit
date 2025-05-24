@@ -1,0 +1,115 @@
+.
+├── CONTRIBUTING.md
+├── LICENSE
+├── README.md
+├── SECURITY.md
+├── backend
+│   ├── config
+│   │   ├── database.js
+│   │   └── env.js
+│   ├── controllers
+│   │   ├── authController.js
+│   │   ├── dashboardController.js
+│   │   └── timeController.js
+│   ├── middleware
+│   │   ├── authMiddleware.js
+│   │   └── errorHandler.js
+│   ├── models
+│   │   └── user.js
+│   ├── routes
+│   │   ├── authRoutes.js
+│   │   ├── dashboardRoutes.js
+│   │   ├── legal.js
+│   │   └── timeRoutes.js
+│   ├── server.js
+│   └── utils
+│       ├── api.js
+│       └── validateUserInput.js
+├── frontend
+│   ├── app.js
+│   ├── assets
+│   │   ├── fonts
+│   │   │   ├── Inter-Black.ttf
+│   │   │   ├── Inter-Bold.ttf
+│   │   │   ├── Inter-Light.ttf
+│   │   │   ├── Inter-Medium.ttf
+│   │   │   ├── Inter-Regular.ttf
+│   │   │   └── Inter-SemiBold.ttf
+│   │   ├── icons
+│   │   │   └── test
+│   │   └── images
+│   │       ├── foto1.png
+│   │       ├── foto2.jpg
+│   │       ├── foto3.jpg
+│   │       ├── foto4.jpg
+│   │       ├── minesweeper.png
+│   │       ├── test
+│   │       └── this.jpg
+│   ├── components
+│   │   ├── footer
+│   │   │   ├── footer.css
+│   │   │   └── footer.html
+│   │   ├── header
+│   │   │   ├── header.css
+│   │   │   ├── header.html
+│   │   │   └── header.js
+│   │   ├── sidebar
+│   │   │   ├── sidebar.css
+│   │   │   ├── sidebar.html
+│   │   │   └── sidebar.js
+│   │   ├── sidebar-admin
+│   │   │   ├── sidebar-admin.css
+│   │   │   ├── sidebar-admin.html
+│   │   │   └── sidebar-admin.js
+│   │   └── time-entry
+│   │       ├── time-entry.css
+│   │       └── time-entry.html
+│   ├── index.html
+│   ├── main-pages
+│   │   ├── inside-app
+│   │   │   ├── calendar
+│   │   │   │   ├── calendar.css
+│   │   │   │   ├── calendar.html
+│   │   │   │   └── calendar.js
+│   │   │   ├── dashboard
+│   │   │   │   ├── dashboard.css
+│   │   │   │   └── dashboard.html
+│   │   │   ├── projects
+│   │   │   │   ├── projects.css
+│   │   │   │   └── projects.html
+│   │   │   ├── projects-overview
+│   │   │   │   ├── projects-overview.css
+│   │   │   │   ├── projects-overview.html
+│   │   │   │   └── projects-overview.js
+│   │   │   ├── reports
+│   │   │   │   ├── reports.css
+│   │   │   │   └── reports.html
+│   │   │   └── settings
+│   │   │       ├── settings.css
+│   │   │       └── settings.html
+│   │   └── outside-app
+│   │       ├── info
+│   │       │   └── info.html
+│   │       ├── login
+│   │       │   ├── login.css
+│   │       │   ├── login.html
+│   │       │   └── login.js
+│   │       ├── privacy
+│   │       │   └── privacy.html
+│   │       ├── register
+│   │       │   ├── register.css
+│   │       │   ├── register.html
+│   │       │   └── register.js
+│   │       └── terms
+│   │           └── terms.html
+│   ├── main.css
+│   ├── scripts
+│   │   ├── api.js
+│   │   └── authCheck.js
+│   ├── styles
+│   └── utils
+├── package-lock.json
+├── package.json
+└── project-tree.txt
+
+36 directories, 77 files
