@@ -92,4 +92,4 @@ If you have any questions about contributing, please contact the project maintai
 
 ## License
 
-By contributing to TimeBit, you agree that your contributions will be licensed under the GNU Affero General Public License v3.0. 
+By contributing to TimeBit, you agree that your contributions will be licensed under the MTI License. 
