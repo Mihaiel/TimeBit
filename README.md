@@ -62,7 +62,7 @@ TimeBit is a modern time tracking and project management application that helps 
 
 ## Contributing
 
-This project is licensed under the GNU Affero General Public License v3.0. Please read our [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+This project is licensed under the MIT License. Please read our [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
 
 ## Security
 
