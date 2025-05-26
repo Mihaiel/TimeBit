@@ -2,7 +2,7 @@ import { loadStyle, loadScript, selectElement } from './domUtils.js';
 import { loadPage } from './contentLoader.js';
 
 /**
- * Loads the User header HTML into main content with corresponding CSS
+ * Loads the user header html, css and js into the <main> element.
  */
 export async function loadHeader() {
   try {
@@ -120,6 +120,10 @@ export async function loadAdminSidebar() {
   }
 }
 
+/**
+ * Hides the sidebar by removing the 'big' class and 'active' class from the toggle button. (used for mobile devices)
+ * Also hides the toggle button.
+ */
 export function hideSidebar(){
     const toggleButton = document.querySelector('.sidebar-toggle');
     const sidebar = document.querySelector('.sidebar');

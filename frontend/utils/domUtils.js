@@ -1,3 +1,8 @@
+/**
+ * Loads a stylesheet into the document.
+ * If the stylesheet is already loaded, it does nothing.
+ * @param {string} href - The URL of the stylesheet to load.
+ */
 export function loadStyle(href) {
     // Check if the stylesheet is already loaded
     const existingLink = document.querySelector(`link.page-style[href="${href}"]`);
@@ -17,6 +22,12 @@ export function loadStyle(href) {
     document.head.appendChild(link);
 }
 
+/**
+ * Loads a script into the document.
+ * If the script is already loaded, it does nothing.
+ * @param {string} src - The URL of the script to load.
+ * @param {boolean} isModule - Whether the script should be loaded as a module (default is true)
+ */
 export function loadScript(src, isModule = true) {
   return new Promise((resolve, reject) => {
     // Remove previously loaded page-specific scripts
@@ -48,14 +59,16 @@ export function loadScript(src, isModule = true) {
 /**
  * Checks if a file exists by sending a HEAD request.
  * Returns a promise that resolves to true if the file exists, false otherwise.
+ * @param {string} path - The URL of the file to check.
  */
 export function fileExists(path) {
     return fetch(path, { method: 'HEAD' }).then(res => res.ok).catch(() => false);
 }
 
 /**
- * Highlights the clicked navigation button and removes highlight from others.
- * (In the Sidebar)
+ * This function adds the 'nav-selected' class to the clicked element
+ * and removes it from all other elements with the same class.
+ * @param {HTMLElement} clickedElement - The element that was clicked.
  */
 export function selectElement(clickedElement) {
     // Remove 'nav-selected' class from all elements

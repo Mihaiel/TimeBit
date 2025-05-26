@@ -3,6 +3,8 @@ import { loadStyle, loadScript, fileExists } from './domUtils.js';
 /**
  * Safely loads a page by fetching its HTML, CSS, and JS (if available).
  * Handles errors and ensures the page is properly loaded into the main content.
+ * @param {string} page - The name of the page to load (e.g., "dashboard", "settings").
+ * @param {boolean} inside - Whether the page is part of the inside app tree (default is true).
  */
 export async function loadPage(page, inside = true) {
   try {
@@ -31,6 +33,12 @@ export async function loadPage(page, inside = true) {
   }
 }
 
+
+/**  
+ * Unloads a page by clearing its content, CSS, and JS.
+ * * @param {string} page - The name of the page to unload (e.g., "dashboard", "settings").
+ * * @param {boolean} inside - Whether the page is part of the inside app tree (default is true).
+ * */
 
 export async function unloadPage(page, inside = true) {
   try {
