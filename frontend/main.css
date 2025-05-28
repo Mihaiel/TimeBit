@@ -602,7 +602,6 @@ input, textarea {
 	border-radius: 40px;
 	background-color: var(--white-25-color);
 	color: var(--black-75-color);
-	transition: 0.3s;
 	font-size: 15px;
 	padding: 10px 15px 10px 15px;
 	width: auto;

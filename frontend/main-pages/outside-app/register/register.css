@@ -42,10 +42,6 @@
   gap: 10px;
 }
 
-.name-fields input {
-  flex: 1;
-}
-
 /* Sign-up-Button zentriert und schmal */
 .signup-button {
   width: 140px;
