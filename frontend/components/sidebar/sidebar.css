@@ -23,7 +23,6 @@ nav {
     left: 0;
     z-index: 100;
     width: 250px;
-    transition-duration: 0.3s;
 }
   
 .sidebar-top {
