@@ -1,6 +1,5 @@
 import { loadPage } from '../../utils/contentLoader.js';
 import { selectElement } from '../../utils/domUtils.js';
-import { hideSidebar } from '../../utils/componentLoader.js';
 
 window.pageInit = function() {
     const logoutButton = document.querySelector('.logout-button');
@@ -30,7 +29,6 @@ window.pageInit = function() {
                 // Even if there's an error, clear local storage and redirect
                 localStorage.clear();
                 loadPage("login", false);
-                hideSidebar();
             }
         });
     }

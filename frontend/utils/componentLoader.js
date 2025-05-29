@@ -63,13 +63,6 @@ export async function loadSidebar() {
         selectElement(e.currentTarget);  // Highlight the clicked element
         loadPage(page);
 
-        
-        // Hide sidebar on mobile if it is open
-        const sidebar = document.querySelector(".sidebar");
-        if (sidebar && sidebar.classList.contains("big")) {
-          hideSidebar();
-        }
-
       });
     });
   } catch (error) {
@@ -116,19 +109,6 @@ export async function loadAdminSidebar() {
     });
 
   } catch (error) {
-    console.error("❌ Failed to load sidebar:", error);
+    console.error("❌ Failed to§ load sidebar:", error);
   }
 }
-
-/**
- * Hides the sidebar by removing the 'big' class and 'active' class from the toggle button. (used for mobile devices)
- * Also hides the toggle button.
- */
-export function hideSidebar(){
-    const toggleButton = document.querySelector('.sidebar-toggle');
-    const sidebar = document.querySelector('.sidebar');
-
-    sidebar.classList.remove('big');
-    toggleButton.classList.remove('active');
-    toggleButton.style.display = none;
-  }

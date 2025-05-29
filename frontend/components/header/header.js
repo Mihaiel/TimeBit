@@ -1,39 +1,9 @@
-import { hideSidebar } from "../../utils/componentLoader.js";
 import { loadPage } from "../../utils/contentLoader.js";
 import { selectElement } from "../../utils/domUtils.js";
 
 window.pageInit = function () {
-    const toggleButton = document.querySelector('.sidebar-toggle');
-    const sidebar = document.querySelector('.sidebar');
     const settingsButtonHeader = document.querySelector('.header-settings-button');
     const settingsButton = document.querySelector('.settings-button');
-
-    if (!toggleButton || !sidebar) {
-        console.warn('Sidebar or toggle button not found');
-        return;
-    }
-
-    function handleResize() {
-        if (window.innerWidth > 999) {
-            sidebar.classList.remove('big');
-            toggleButton.classList.remove('active');
-            toggleButton.style.display = 'none';
-        } else {
-            toggleButton.style.display = '';
-        }
-    }
-
-    // Call once on load
-    handleResize();
-
-    // Call again on resize
-    window.addEventListener('resize', handleResize);
-
-    // Button toggle
-    toggleButton.addEventListener('click', () => {
-        sidebar.classList.toggle('big');
-        toggleButton.classList.toggle('active');
-    });
 
     if (settingsButtonHeader) {
       settingsButtonHeader.addEventListener("click", (e) => {
@@ -47,7 +17,6 @@ window.pageInit = function () {
 
         selectElement(settingsButton); // Highlight the clicked element
         loadPage(page);
-        hideSidebar();
       });
     }
 };
