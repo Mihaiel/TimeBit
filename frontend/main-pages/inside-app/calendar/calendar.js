@@ -1,7 +1,7 @@
 import { fileExists, loadStyle } from "../../../utils/domUtils.js";
 
 window.pageInit = function() {
-    const days = ["Sun.", "Mon.", "Tue.", "Wed.", "Thu.", "Fri.", "Sat."];
+    const days = ["Su.", "Mo.", "Tu.", "We.", "Th.", "Fr.", "Sa."];
     let currentViewDate = getMonday(new Date()); // keeps track of the start of the current week
 
     /* ________________ SELECTED MONTH AND YEAR LOGIC ________________*/
@@ -270,5 +270,41 @@ window.pageInit = function() {
             element.style.top = `${newTop}px`;
         });
     }
+
+function adjustCalendarForMobile() {
+    const isMobile = window.innerWidth <= 783;
+
+    const allDays = document.querySelectorAll(".calendar-day");
+    const allColumns = document.querySelectorAll(".day-column");
+
+    const currentDayHeader = document.querySelector(".calendar-day.today");
+    const currentDayColumn = document.querySelector(".day-column.today");
+
+    if (isMobile) {
+        // Remove all other calendar-day elements
+        allDays.forEach((day) => {
+            if (day !== currentDayHeader) {
+                day.style.display = "none";
+            }
+        });
+
+        // Remove all other day-column elements
+        allColumns.forEach((column) => {
+            if (column !== currentDayColumn) {
+                column.style.display = "none";
+            }
+        });
+    } else {
+        // Restore all elements
+        allDays.forEach((day) => {
+            day.style.display = "";
+        });
+        allColumns.forEach((column) => {
+            column.style.display = "";
+        });
+    }
+}
+adjustCalendarForMobile();
+window.addEventListener("resize", adjustCalendarForMobile);
 
 };

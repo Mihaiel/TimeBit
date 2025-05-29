@@ -193,6 +193,17 @@
 
 @media (max-width: 768px) {
 
+	.calendar-day.today {
+		grid-column: span 7; /* Take full width after label */
+	}
+
+	.timesheet-header select{
+		display: none;
+	}
+
+	.left-right-container button:first-of-type{
+		display: none;
+	}
 }
 
 @media (max-width: 992px) {

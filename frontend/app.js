@@ -20,7 +20,7 @@ export async function loadMainScreen() {
           // Load the sidebar and header with user information
           await loadSidebar();
           await loadHeader();
-          loadPage("settings", true);
+          loadPage("calendar", true);
       } catch (error) {
           console.error('Error loading main screen:', error);
           localStorage.clear(); // Clear invalid tokens

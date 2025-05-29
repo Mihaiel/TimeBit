@@ -9,15 +9,18 @@
 .time-entry-container{
     position: absolute;
     top: 50%;
-    left: calc(50% + 125px); /* shift by half the sidebar */
-    width: 500px;
-    height: 500px;
+    left: calc(50% + 125px); /* Shift by half the sidebar */
+    max-width: 500px;
+    max-height: 500px;
+    min-height: 100px;
+    min-width: 100px;
     z-Index: 10;
-    transform: translate(-50%, -50%); /* ✅ Centers the popup */
+    transform: translate(-50%, -50%); /* Centers the popup */
     display: flex;
     justify-content: start;
     align-items: center;
     flex-direction: column;
+    padding-bottom: 20px;
 }
 
 .time-entry-container-inside{
@@ -101,7 +104,28 @@ textarea{
 }
 
 @media (max-width: 768px) {
+    .time-entry-container{
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: calc(100% - 40px);
+        max-width: 100%;
+        max-height: 100%;
+        transform: none;
+        border-radius: 0;
+    }
 
+    .time-entry-header{
+        display: none;
+    }
+
+    .entry-block input[type=date]{
+        display: none;
+    }
+
+    .time-entry-container-inside{
+        gap: 5px;
+    }
 }
 
 @media (max-width: 992px) {
