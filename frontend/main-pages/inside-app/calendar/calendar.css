@@ -193,7 +193,7 @@
 
 @media (max-width: 768px) {
 
-	.calendar-day.today {
+	.calendar-day{
 		grid-column: span 7; /* Take full width after label */
 	}
 

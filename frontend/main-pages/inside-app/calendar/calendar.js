@@ -140,19 +140,22 @@ window.pageInit = function() {
 
     }
 
-    // Next and previous week function that is added to the left and right buttons
+    // Next and previous week (or day) function that is added to the left and right buttons
     function nextWeek(right) {
-        const delta = right ? 7 : -7;
+        const isMobile = window.innerWidth <= 783;
+        const delta = right ? (isMobile ? 1 : 7) : (isMobile ? -1 : -7);
+
         currentViewDate.setDate(currentViewDate.getDate() + delta);
-    
+
         const updatedMonth = currentViewDate.getMonth() + 1; // JS month is 0-indexed
         const updatedYear = currentViewDate.getFullYear();
-    
+
         monthSelect.value = updatedMonth;
         yearSelect.value = updatedYear;
-    
+
         updateCalendar(updatedMonth, updatedYear, currentViewDate);
     }
+
 
     // Get's the current day of the system and shows as starting point in calendar
     function getToday() {
@@ -304,6 +307,7 @@ function adjustCalendarForMobile() {
         });
     }
 }
+
 adjustCalendarForMobile();
 window.addEventListener("resize", adjustCalendarForMobile);
 
