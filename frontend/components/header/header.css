@@ -51,9 +51,7 @@
 
 /* RESPONSIVENESS - SMALLER SCREENS */
 @media (max-width: 480px) {
-  .user-header svg{
-        display: none;
-    }
+
 }
 
 @media (max-width: 768px) {
