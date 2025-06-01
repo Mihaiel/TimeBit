@@ -4,6 +4,7 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
+import setupSwagger from './utils/swagger.js';
 
 // 🔌 Import API routes
 import timeRoutes from "./routes/timeRoutes.js";
@@ -27,9 +28,13 @@ app.use("/time", timeRoutes);
 app.use('/auth', authRoutes);
 app.use('/legal', legalRoutes);
 
+// 📝 Setup Swagger
+setupSwagger(app);
+
 // 🌐 Serve frontend static files (HTML, CSS, JS)
 // Any request to localhost will serve files from /frontend folder
 app.use(express.static(path.join(__dirname, "../frontend")));
+
 
 // 🟢 Start the server
 app.listen(port, () => {
