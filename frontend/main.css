@@ -617,8 +617,16 @@ textarea {
 
 
 /* ------------ GLOBAL MEDIA QUERIES ------------ */
+@media (max-width: 480px) {
+
+}
+
 @media (max-width: 768px) {
 	main{
 		padding: 1rem;
 	}
+}
+
+@media (max-width: 992px) {
+
 }
