@@ -10,6 +10,8 @@ import setupSwagger from './utils/swagger.js';
 import timeRoutes from "./routes/timeRoutes.js";
 import authRoutes from "./routes/authRoutes.js"
 import legalRoutes from './routes/legal.js';
+import weatherRoutes from "./routes/weatherRoutes.js";
+import notificationRoutes from "./routes/notificationRoutes.js";
 
 // Import and run the DB connection (for initial connection test)
 import "./config/database.js";
@@ -27,6 +29,8 @@ app.use(express.json());
 app.use("/time", timeRoutes);
 app.use('/auth', authRoutes);
 app.use('/legal', legalRoutes);
+app.use("/weather", weatherRoutes);
+app.use("/notification", notificationRoutes);
 
 // Setup Swagger
 setupSwagger(app);

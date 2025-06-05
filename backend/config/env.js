@@ -10,5 +10,8 @@ export const config = {
   jwtSecret: process.env.JWT_SECRET,
   googleClientId: process.env.GOOGLE_CLIENT_ID,
   googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  googleCallbackURL: process.env.GOOGLE_CALLBACK_URL
+  googleCallbackURL: process.env.GOOGLE_CALLBACK_URL,
+  openWeatherApiKey: process.env.OPENWEATHER_API_KEY,
+  sendGridApiKey: process.env.SENDGRID_API_KEY,
+  sendGridEmailFrom: process.env.SENDGRID_EMAIL_FROM
 };
