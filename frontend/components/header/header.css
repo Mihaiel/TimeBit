@@ -49,6 +49,17 @@
     transform: scale(0.95);
 }
 
+.weather-info {
+    display: flex;
+    align-items: center;
+}
+
+.weather-temp {
+    font-size: 20px;
+    color: var(--black-color);
+    font-family: 'inter-medium', sans-serif;
+}
+
 /* RESPONSIVENESS - SMALLER SCREENS */
 @media (max-width: 480px) {
 

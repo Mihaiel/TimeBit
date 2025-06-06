@@ -1,9 +1,10 @@
 import express from 'express';
 import axios from 'axios';
+import { config } from '../config/env.js';
 
 const router = express.Router();
 
-const API_KEY = process.env.WEATHER_API_KEY; // Ensure you set this in your environment variables
+const API_KEY = config.openWeatherApiKey;
 const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
 
 router.get('/', async (req, res) => {
@@ -19,7 +20,7 @@ router.get('/', async (req, res) => {
         const weatherInfo = {
             temperature: weatherData.main.temp,
             description: weatherData.weather[0].description,
-            icon: `http://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`
+            icon: `https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`
         };
 
         res.json(weatherInfo);
