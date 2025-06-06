@@ -52,6 +52,7 @@
 .weather-info {
     display: flex;
     align-items: center;
+    gap: 5px;
 }
 
 .weather-temp {
@@ -61,8 +62,22 @@
 }
 
 #weather-icon {
-    width: 36px;
-    height: 36px;
+    width: 33px;
+    height: 33px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+}
+
+.visually-hidden {
+    position: absolute;       /* Removes it from the normal layout flow */
+    width: 1px;               /* Minimizes the width */
+    height: 1px;              /* Minimizes the height */
+    padding: 0;               /* No internal spacing */
+    margin: -1px;             /* Moves it outside the visible area */
+    overflow: hidden;         /* Hides any overflowing content */
+    clip: rect(0 0 0 0);      /* Clips the visible area to 0x0 pixels */
+    white-space: nowrap;      /* Prevents line breaks */
+    border: 0;                /* Ensures no borders are shown */
 }
 
 /* RESPONSIVENESS - SMALLER SCREENS */
