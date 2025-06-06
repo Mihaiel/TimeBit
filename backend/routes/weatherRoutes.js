@@ -7,7 +7,42 @@ const router = express.Router();
 const API_KEY = config.openWeatherApiKey;
 const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
 
-router.get('/', async (req, res) => {
+/**
+ * @swagger
+ * /api/weather:
+ *   get:
+ *     summary: Get weather information for a specified city
+ *     tags: [APIs]
+ *     parameters:
+ *       - in: query
+ *         name: city
+ *         schema:
+ *           type: string
+ *         required: false
+ *         description: Name of the city (defaults to Vienna)
+ *     responses:
+ *       200:
+ *         description: Successful weather data response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 temperature:
+ *                   type: number
+ *                   format: float
+ *                   example: 22.5
+ *                 description:
+ *                   type: string
+ *                   example: clear sky
+ *                 icon:
+ *                   type: string
+ *                   format: uri
+ *                   example: https://openweathermap.org/img/wn/01d@2x.png
+ *       500:
+ *         description: Failed to fetch weather data
+ */
+router.get('/weather', async (req, res) => {
     const city = req.query.city || 'Vienna'; // Default to Vienna if no city is provided
 
     const url = `${BASE_URL}?q=${city}&appid=${API_KEY}&units=metric`;

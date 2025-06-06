@@ -30,9 +30,7 @@ app.use(express.json());
 app.use("/time", timeRoutes);
 app.use('/auth', authRoutes);
 app.use('/legal', legalRoutes);
-app.use("/api/weather", weatherRoutes);
-app.use("/notification", notificationRoutes);
-app.use("/api", notificationRoutes);
+app.use("/api", weatherRoutes, notificationRoutes);
 
 // Setup Swagger
 setupSwagger(app);
