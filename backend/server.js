@@ -12,6 +12,7 @@ import authRoutes from "./routes/authRoutes.js"
 import legalRoutes from './routes/legal.js';
 import weatherRoutes from "./routes/weatherRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
 
 
 // Import and run the DB connection (for initial connection test)
@@ -31,6 +32,7 @@ app.use("/time", timeRoutes);
 app.use('/auth', authRoutes);
 app.use('/legal', legalRoutes);
 app.use("/api", weatherRoutes, notificationRoutes);
+app.use('/admin', adminRoutes);
 
 // Setup Swagger
 setupSwagger(app);
