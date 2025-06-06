@@ -60,6 +60,11 @@
     font-family: 'inter-medium', sans-serif;
 }
 
+#weather-icon {
+    width: 36px;
+    height: 36px;
+}
+
 /* RESPONSIVENESS - SMALLER SCREENS */
 @media (max-width: 480px) {
 
