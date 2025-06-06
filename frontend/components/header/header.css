@@ -68,7 +68,7 @@
     border-radius: 50%;
 }
 
-.visually-hidden {
+.visually-hidden {            /* accessibility class for screen readers */
     position: absolute;       /* Removes it from the normal layout flow */
     width: 1px;               /* Minimizes the width */
     height: 1px;              /* Minimizes the height */

@@ -1,7 +1,10 @@
 import express from 'express';
 import { sendNotificationEmail } from '../utils/emailService.js';
+import { saveTimeEntryNotification } from '../controllers/notificationController.js';
 
 const router = express.Router();
+
+router.post('/time-entry', saveTimeEntryNotification);
 
 router.post('/send-notification', async (req, res) => {
   const { to, subject, text } = req.body;

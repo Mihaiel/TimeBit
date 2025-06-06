@@ -1,14 +1,15 @@
 import sgMail from '@sendgrid/mail';
 import { config } from '../config/env.js';
 
-sgMail.setApiKey(config.SENDGRID_API_KEY);
+sgMail.setApiKey(config.sendGridApiKey);
 
 export async function sendNotificationEmail(to, subject, text) {
   const msg = {
     to,
-    from: config.SENDGRID_FROM_EMAIL,
+    from: config.sendGridEmailFrom,
     subject,
     text,
+    html: `<p>${text}</p>`, // Optional HTML content
   };
 
   try {
