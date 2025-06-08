@@ -6,6 +6,8 @@ window.pageInit = function () {
     const pageTitle = document.querySelector(".project-title");
     const submitButton = document.querySelector("button[type='submit']");
     const projectTypeTag = document.querySelector(".project-type-tag");
+    const deleteButton = document.querySelector(".delete-project");
+    const statusButton = document.querySelector(".status-project");
 
     // Set minimum date for date inputs to today
     const today = new Date().toISOString().split('T')[0];
@@ -15,7 +17,15 @@ window.pageInit = function () {
     // Load project data if it exists
     const currentProject = JSON.parse(localStorage.getItem('currentProject'));
     if (currentProject) {
-        // Update title and button based on project status
+        // Show/hide buttons based on whether we're editing an existing project
+        deleteButton.style.display = 'block';
+        statusButton.style.display = 'block';
+        submitButton.textContent = 'Update';
+
+        // Update status button text based on current status
+        statusButton.textContent = currentProject.status === 'finished' ? 'Move to ongoing' : 'Move to finished';
+
+        // Update title and tag based on project status
         if (currentProject.status === 'finished') {
             pageTitle.textContent = currentProject.title;
             projectTypeTag.textContent = 'FINISHED PROJECT';
@@ -23,7 +33,6 @@ window.pageInit = function () {
             pageTitle.textContent = currentProject.title;
             projectTypeTag.textContent = 'ONGOING PROJECT';
         }
-        submitButton.textContent = 'Update';
 
         // Fill form with project data
         projectForm.title.value = currentProject.title;
@@ -36,11 +45,67 @@ window.pageInit = function () {
         }
         projectForm.notify.checked = currentProject.notify;
     } else {
-        // Reset to default for new project
+        // Hide buttons for new project
+        deleteButton.style.display = 'none';
+        statusButton.style.display = 'none';
         pageTitle.textContent = 'Create a new Project';
         projectTypeTag.textContent = 'NEW PROJECT';
         submitButton.textContent = 'Create';
     }
+
+    // Handle delete button click
+    deleteButton.addEventListener('click', async () => {
+        if (confirm('Are you sure you want to delete this project?')) {
+            try {
+                const response = await fetch(`/projects/${currentProject.id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to delete project');
+                }
+
+                alert('Project deleted successfully!');
+                localStorage.removeItem('currentProject');
+                loadPage("projects-overview");
+            } catch (error) {
+                console.error('Error deleting project:', error);
+                alert('Failed to delete project. Please try again.');
+            }
+        }
+    });
+
+    // Handle status change button click
+    statusButton.addEventListener('click', async () => {
+        const newStatus = currentProject.status === 'finished' ? 'ongoing' : 'finished';
+        try {
+            const response = await fetch(`/projects/${currentProject.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
+                body: JSON.stringify({
+                    ...currentProject,
+                    status: newStatus
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to update project status');
+            }
+
+            alert(`Project moved to ${newStatus} successfully!`);
+            localStorage.removeItem('currentProject');
+            loadPage("projects-overview");
+        } catch (error) {
+            console.error('Error updating project status:', error);
+            alert('Failed to update project status. Please try again.');
+        }
+    });
 
     if (backButton) {
         backButton.addEventListener("click", function () {
@@ -48,9 +113,17 @@ window.pageInit = function () {
         });
     }
 
+    // Handle form submission
     if (projectForm) {
-        projectForm.addEventListener("submit", async function (e) {
+        // Add submit event listener to the submit button instead of the form
+        submitButton.addEventListener("click", async function (e) {
             e.preventDefault();
+
+            // Validate form
+            if (!projectForm.checkValidity()) {
+                projectForm.reportValidity();
+                return;
+            }
 
             // Get form data
             const formData = new FormData(projectForm);

@@ -35,6 +35,21 @@
 	gap: 20px;
 }
 
+.button-container-outer{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px;
+}
+
+.button-red{
+	background-color: #B20000;
+}
+
+.button-green{
+	background-color: #355427;
+}
+
 /* RESPONSIVENESS - SMALLER SCREENS */
 @media (max-width: 480px) {
 	.flexbox-left,
