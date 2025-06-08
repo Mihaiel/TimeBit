@@ -13,7 +13,7 @@ import legalRoutes from './routes/legal.js';
 import weatherRoutes from "./routes/weatherRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
-
+import projectRoutes from "./routes/projectRoutes.js";
 
 // Import and run the DB connection (for initial connection test)
 import "./config/database.js";
@@ -33,6 +33,7 @@ app.use('/auth', authRoutes);
 app.use('/legal', legalRoutes);
 app.use("/api", weatherRoutes, notificationRoutes);
 app.use('/admin', adminRoutes);
+app.use('/projects', projectRoutes);
 
 // Setup Swagger
 setupSwagger(app);
@@ -40,7 +41,6 @@ setupSwagger(app);
 // Serve frontend static files (HTML, CSS, JS)
 // Any request to localhost will serve files from /frontend folder
 app.use(express.static(path.join(__dirname, "../frontend")));
-
 
 // Start the server
 app.listen(port, () => {

@@ -37,6 +37,10 @@
   color: #A1A1A1;
 }
 
+button.project.box.new-project:hover {
+  background-color: #F2F2F2 !important;
+}
+
 /* RESPONSIVENESS - SMALLER SCREENS */
 @media (max-width: 480px) {
   .project-type-container{
