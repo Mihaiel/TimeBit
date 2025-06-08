@@ -1,13 +1,13 @@
 /*** 
 
 ====================================================================
-	ADMIN LOGIN STYLING
+	ADMIN INSIDE STYLING
 ====================================================================
 
 ***/
 
 /* Box-Größe & Centering */
-.login-box {
+.main-box {
 	background: white;
 	max-width: 500px;
 	max-height: 500px;
@@ -35,34 +35,19 @@
 	margin-top: 40px;
 }
 
-.login-form {
+.add-user-form, .update-user-form {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
 }
-
-.login-form input {
-	width: 80%; 
-	max-width: 400px;   
-	margin: 0 auto;
-	height: 48px;
-	padding: 0 20px;
-	border-radius: 40px;
-	background-color: rgb(232,240, 254);
-	color: black;
-	font-size: 15px;
-	font-family: 'Roboto', sans-serif;
-	border: none;
-	outline: none;
-}
   
   /* Login-Button */
-.login-button {
+.add-user-button, .delete-user-button {
 	width: 140px;
   	margin: 16px auto 0;
 	border-radius: 40px;
-	background-color: #5DAB6E;
+	background-color: #51ABEC;
 	color: white;
 	transition: 0.3s;
 	display: flex;
@@ -73,7 +58,7 @@
 }
 
 button:hover{
-	background-color: #489357;
+	background-color: #3c8ac2;
 	transform: scale(1.05);
 	cursor: pointer;
 }
@@ -117,6 +102,12 @@ button:active{
 .logo svg{
 	color: #51ABEC;
 }
+
+h2 {
+    font-size: 25.54px;;
+	font-family: 'Roboto', sans-serif;
+}
+
 
 /* RESPONSIVENESS - SMALLER SCREENS */
 @media (max-width: 480px) {
