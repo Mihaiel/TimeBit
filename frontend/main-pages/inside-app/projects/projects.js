@@ -3,11 +3,44 @@ import { loadPage } from "../../../utils/contentLoader.js";
 window.pageInit = function () {
     const backButton = document.querySelector(".button-black");
     const projectForm = document.getElementById("projectForm");
+    const pageTitle = document.querySelector(".project-title");
+    const submitButton = document.querySelector("button[type='submit']");
+    const projectTypeTag = document.querySelector(".project-type-tag");
 
     // Set minimum date for date inputs to today
     const today = new Date().toISOString().split('T')[0];
     document.getElementById('start-date').min = today;
     document.getElementById('end-date').min = today;
+
+    // Load project data if it exists
+    const currentProject = JSON.parse(localStorage.getItem('currentProject'));
+    if (currentProject) {
+        // Update title and button based on project status
+        if (currentProject.status === 'finished') {
+            pageTitle.textContent = currentProject.title;
+            projectTypeTag.textContent = 'FINISHED PROJECT';
+        } else {
+            pageTitle.textContent = currentProject.title;
+            projectTypeTag.textContent = 'ONGOING PROJECT';
+        }
+        submitButton.textContent = 'Update';
+
+        // Fill form with project data
+        projectForm.title.value = currentProject.title;
+        projectForm.category.value = currentProject.category;
+        projectForm.description.value = currentProject.description || '';
+        projectForm.weekly_hours.value = currentProject.weekly_hours;
+        projectForm.start_date.value = currentProject.start_date.split('T')[0];
+        if (currentProject.end_date) {
+            projectForm.end_date.value = currentProject.end_date.split('T')[0];
+        }
+        projectForm.notify.checked = currentProject.notify;
+    } else {
+        // Reset to default for new project
+        pageTitle.textContent = 'Create a new Project';
+        projectTypeTag.textContent = 'NEW PROJECT';
+        submitButton.textContent = 'Create';
+    }
 
     if (backButton) {
         backButton.addEventListener("click", function () {
@@ -33,8 +66,11 @@ window.pageInit = function () {
             };
 
             try {
-                const response = await fetch('/projects', {
-                    method: 'POST',
+                const url = currentProject ? `/projects/${currentProject.id}` : '/projects';
+                const method = currentProject ? 'PUT' : 'POST';
+
+                const response = await fetch(url, {
+                    method: method,
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -44,17 +80,20 @@ window.pageInit = function () {
 
                 if (!response.ok) {
                     const errorData = await response.json();
-                    throw new Error(errorData.error || 'Failed to create project');
+                    throw new Error(errorData.error || 'Failed to save project');
                 }
 
                 // Show success message
-                alert('Project created successfully!');
+                alert(currentProject ? 'Project updated successfully!' : 'Project created successfully!');
+                
+                // Clear current project data
+                localStorage.removeItem('currentProject');
                 
                 // Redirect back to projects overview
                 loadPage("projects-overview");
             } catch (error) {
-                console.error('Error creating project:', error);
-                alert(error.message || 'Failed to create project. Please try again.');
+                console.error('Error saving project:', error);
+                alert(error.message || 'Failed to save project. Please try again.');
             }
         });
     }
