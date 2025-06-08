@@ -47,8 +47,8 @@ const Project = sequelize.define('Project', {
 }, {
     // Specify where in the Database 
     tableName: 'projects',
-    // Enable createdAt and updatedAt
-    timestamps: true,
+    // Disable createdAt and updatedAt
+    timestamps: false,
     // Automatically map camelCase to snake_case
     underscored: true
 });
