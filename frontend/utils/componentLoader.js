@@ -20,12 +20,12 @@ export async function loadHeader() {
       loadScript("/components/header/header.js");
 
       // Retrieve the logged-in user's information from localStorage
-      const user = JSON.parse(localStorage.getItem("token"));
+      const user = JSON.parse(localStorage.getItem("user"));
 
       if (user) {
           // Update the header with the logged-in user's name
           const userNameElement = document.querySelector(".header .user-header h2.base");
-          userNameElement.textContent = `${user.first_name} ${user.last_name}`;
+          userNameElement.textContent = `${user.firstName} ${user.lastName}`;
       }
 
   } catch (error) {
