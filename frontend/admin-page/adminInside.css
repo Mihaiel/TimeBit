@@ -35,14 +35,14 @@
 	margin-top: 40px;
 }
 
-.add-user-form, .update-user-form {
+.add-user-form, .delete-user-form {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
 }
   
-  /* Login-Button */
+  /* Buttons */
 .add-user-button, .delete-user-button {
 	width: 140px;
   	margin: 16px auto 0;
