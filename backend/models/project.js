@@ -45,7 +45,12 @@ const Project = sequelize.define('Project', {
         defaultValue: 'ongoing'
     }
 }, {
-    timestamps: true
+    // Specify where in the Database 
+    tableName: 'projects',
+    // Enable createdAt and updatedAt
+    timestamps: true,
+    // Automatically map camelCase to snake_case
+    underscored: true
 });
 
 // Define the relationship with User

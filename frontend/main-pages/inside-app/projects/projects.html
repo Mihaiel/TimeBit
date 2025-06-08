@@ -1,51 +1,52 @@
 <div class="box flexbox">
-    <div class="flexbox-left">
-        <p class="color-primary bold project-type-tag">NEW PROJECT</p>
-        <h2>Create a new Project</h2>
-        <p class="bold color-b-75">Details</p>
-        <form>
-            <input type="text" placeholder="Project title" name="title">
-            <select id="category" class="input-field">            
-                <option value="web">Study</option>
-                <option value="mobile">Health</option>
-                <option value="data">Work</option>
-                <option value="data">Hobby</option>
-            </select>
-            <textarea style="height: 150px;" placeholder="Project description" name="description"></textarea>
-        </form>
-    </div>
-    <div class="flexbox-right">         
-        <div>
-            <p class="bold color-b-75">Time Allocation</p><br>
-            <form class="form">
-                <div>
+    <form id="projectForm" class="flexbox">
+        <div class="flexbox-left">
+            <p class="color-primary bold project-type-tag">NEW PROJECT</p>
+            <h2>Create a new Project</h2>
+            <p class="bold color-b-75">Details</p>
+            <div class="form-section">
+                <input type="text" id="title" name="title" placeholder="Project title" required>
+                <select id="category" name="category" class="input-field" required>            
+                    <option value="study">Study</option>
+                    <option value="health">Health</option>
+                    <option value="work">Work</option>
+                    <option value="hobby">Hobby</option>
+                </select>
+                <textarea id="description" name="description" style="height: 150px;" placeholder="Project description"></textarea>
+            </div>
+        </div>
+        <div class="flexbox-right">         
+            <div>
+                <p class="bold color-b-75">Time Allocation</p><br>
+                <div class="form-section">
                     <div class="miniflexbox">
                         <label for="weekly-hours">Weekly Hours</label>
-                        <input type="text" id="weekly-hours" class="input-field" placeholder="10" >
+                        <input type="number" id="weekly-hours" name="weekly_hours" class="input-field" placeholder="10" min="1" max="168" required>
                     </div>
                     <div class="miniflexbox">
                         <label for="start-date">Start Date</label>
-                        <input type="date" id="start-date" class="input-field" min: today()> 
+                        <input type="date" id="start-date" name="start_date" class="input-field" required> 
                     </div>
                     <div class="miniflexbox">
                         <label for="end-date">End Date</label>
-                        <input type="date" id="end-date" class="input-field" min: today()>
+                        <input type="date" id="end-date" name="end_date" class="input-field">
                     </div>
                 </div>
-            </form>
-            <p class="bold color-b-75">Settings</p><br>
-            <form>
-                <label for="file-upload" class="file-upload">Upload a project photo</label>
-                <input type="file" id="file-upload" accept="image/*">
-                <label class="notifications-checkbox-container">
-                    <input type="checkbox" name = "checkbox" id="checkbox">
-                    <p>Enable notifications if goal is missed or the quota has been reached</p>
-                </label>
-            </form>
-        </div>
-            <div class="button-container">
-                <button class="button-black">Back</button>
-                <button class="button">Create</button>
+                <p class="bold color-b-75">Settings</p><br>
+                <div class="form-section">
+                    <label for="file-upload" class="file-upload">Upload a project photo</label>
+                    <input type="file" id="file-upload" name="background_image" accept="image/*">
+                    <label class="notifications-checkbox-container">
+                        <input type="checkbox" name="notify" id="notify">
+                        <p>Enable notifications if goal is missed or the quota has been reached</p>
+                    </label>
+                </div>
             </div>
-    </div>
+            <div class="button-container">
+                <button type="button" class="button-black">Back</button>
+                <button type="submit" class="button">Create</button>
+            </div>
+        </div>
+    </form>
 </div>
+
