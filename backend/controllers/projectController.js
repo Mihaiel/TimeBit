@@ -1,4 +1,6 @@
 import Project from '../models/project.js';
+import User from '../models/user.js';
+import { sendProjectCreationNotification } from './notificationController.js';
 
 // Get all projects for the authenticated user
 export const getProjects = async (req, res) => {
@@ -33,6 +35,12 @@ export const createProject = async (req, res) => {
         const userId = req.user.id;
         const { title, category, description, weekly_hours, start_date, end_date, background_image_url, notify } = req.body;
         
+        // Get user's email
+        const user = await User.findByPk(userId);
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        
         const project = await Project.create({
             user_id: userId,
             title,
@@ -45,6 +53,21 @@ export const createProject = async (req, res) => {
             notify,
             status: 'ongoing'
         });
+
+        // Send project creation notification
+        try {
+            await sendProjectCreationNotification(user.email, {
+                title,
+                category,
+                description,
+                weekly_hours,
+                start_date,
+                end_date
+            });
+        } catch (notificationError) {
+            // Log the error but don't fail the project creation
+            console.error('Failed to send project creation notification:', notificationError);
+        }
         
         res.status(201).json(project);
     } catch (error) {

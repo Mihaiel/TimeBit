@@ -7,7 +7,6 @@ import { fileURLToPath } from "url";
 import setupSwagger from './utils/swagger.js';
 
 // Import API routes
-import timeRoutes from "./routes/timeRoutes.js";
 import authRoutes from "./routes/authRoutes.js"
 import legalRoutes from './routes/legal.js';
 import weatherRoutes from "./routes/weatherRoutes.js";
@@ -28,7 +27,6 @@ const port = 3000;
 
 // 🔀 Mount API routes
 app.use(express.json());
-app.use("/time", timeRoutes);
 app.use('/auth', authRoutes);
 app.use('/legal', legalRoutes);
 app.use("/api", weatherRoutes, notificationRoutes);

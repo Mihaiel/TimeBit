@@ -3,13 +3,13 @@ import { config } from '../config/env.js';
 
 sgMail.setApiKey(config.sendGridApiKey);
 
-export async function sendNotificationEmail(to, subject, text) {
+export async function sendNotificationEmail(to, subject, text, html) {
   const msg = {
     to,
     from: config.sendGridEmailFrom,
     subject,
     text,
-    html: `<p>${text}</p>`, // Optional HTML content
+    html: html || `<p>${text}</p>`, // Use provided HTML or fallback to simple text
   };
 
   try {
