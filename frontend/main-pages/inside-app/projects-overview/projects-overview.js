@@ -1,4 +1,5 @@
 import { loadPage } from "../../../utils/contentLoader.js";
+import { loadingScreen } from "../../../components/loading-screen/loading-screen.js";
 
 window.pageInit = function () {
     const newProjectButton = document.querySelector("button.new-project");
@@ -32,6 +33,9 @@ window.pageInit = function () {
     // Function to load projects
     async function loadProjects() {
         try {
+            // Show loading screen
+            loadingScreen.show();
+
             const response = await fetch('/projects', {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -78,6 +82,10 @@ window.pageInit = function () {
             }
         } catch (error) {
             console.error('Error loading projects:', error);
+            alert('Failed to load projects. Please try again.');
+        } finally {
+            // Hide loading screen
+            loadingScreen.hide();
         }
     }
 
