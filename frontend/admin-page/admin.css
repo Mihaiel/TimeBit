@@ -168,6 +168,30 @@ button:active{
 	cursor: pointer;
 }
 
+.logout-button {
+  width: 140px;
+  margin: 16px auto 0;
+  border-radius: 40px;
+  background-color: #E57373; /* rot */
+  color: white;
+  transition: 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  padding: 10px;
+}
+
+.logout-button:hover {
+  background-color: #d24444;
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.logout-button:active {
+  transform: scale(0.95);
+}
+
 /* RESPONSIVENESS - SMALLER SCREENS */
 @media (max-width: 480px) {
 	.login-box{
