@@ -50,6 +50,14 @@
 	background-color: #355427;
 }
 
+.button-red:hover{
+	background-color: #B20000;
+}
+
+.button-green:hover{
+	background-color: #355427;
+}
+
 /* RESPONSIVENESS - SMALLER SCREENS */
 @media (max-width: 480px) {
 	.flexbox-left,

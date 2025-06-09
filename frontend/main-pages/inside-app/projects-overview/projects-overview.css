@@ -41,6 +41,10 @@ button.project.box.new-project:hover {
   background-color: #F2F2F2 !important;
 }
 
+.project.box:hover{
+  background-color: rgb(242, 242, 242, 1);
+}
+
 /* RESPONSIVENESS - SMALLER SCREENS */
 @media (max-width: 480px) {
   .project-type-container{
