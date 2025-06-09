@@ -118,6 +118,56 @@ button:active{
 	color: #51ABEC;
 }
 
+/* Admin-Inside */
+
+.main-box {
+	background: white;
+	max-width: 500px;
+	max-height: 500px;
+	height: auto;
+	width: auto;
+	padding: 60px 50px 80px;
+	border-radius: 60px;
+	box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+	margin: auto; /* wirklich zentrieren */
+  }
+  
+  /* Inhalt & Form */
+.box-content {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: center;
+	justify-content: center;
+	margin-top: 40px;
+}
+
+.add-user-button, .update-user-button, .delete-user-button {
+	width: 140px;
+  	margin: 16px auto 0;
+	border-radius: 40px;
+	background-color: #51ABEC;
+	color: white;
+	transition: 0.3s;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 15px;
+	padding: 10px;
+}
+
+.add-user-button:hover, .update-user-button:hover, .delete-user-button:hover {
+	background-color: #3c8ac2;
+	transform: scale(1.05);
+	cursor: pointer;
+}
+
 /* RESPONSIVENESS - SMALLER SCREENS */
 @media (max-width: 480px) {
 	.login-box{
