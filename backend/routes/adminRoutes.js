@@ -11,9 +11,4 @@ router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../../frontend/admin-page/admin.html'));
 });
 
-// Admin CSS route
-router.get('/admin.css', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../frontend/admin-page/admin.css'));
-});
-
 export default router; 
