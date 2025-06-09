@@ -138,6 +138,8 @@ window.pageInit = function() {
         }
      });
 
+    // Load time entries after updating the calendar
+    loadTimeEntries();
     }
 
     // Next and previous week (or day) function that is added to the left and right buttons
@@ -176,7 +178,6 @@ window.pageInit = function() {
 
     // Creates a new Time Entry Pop Up
     async function newTimeEntry() {
-
         // Checks if a time entry is already shown
         if (document.querySelector(".time-entry-container")) {return; }
 
@@ -204,15 +205,133 @@ window.pageInit = function() {
           wrapper.remove();
         });
 
-        // Create an event-block (time-entry) and then close the popUp
-        wrapper.querySelector(".submit-entry").addEventListener("click", () => {
-            wrapper.remove();
-          });
-      }
+        // Load projects for the select dropdown
+        try {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                throw new Error('No authentication token found');
+            }
+
+            // Get the users projects
+            const response = await fetch('/projects', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error('Server response:', errorData);
+                throw new Error(`Failed to fetch projects: ${errorData.message || response.statusText}`);
+            }
+            
+            const projects = await response.json();
+            console.log('Received projects:', projects);
+
+            const projectSelect = document.querySelector('#project-select');
+            if (!projectSelect) {
+                throw new Error('Project select element not found');
+            }
+            
+            // Clear existing options
+            projectSelect.innerHTML = '';
+            
+            // Add a default option
+            const defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            defaultOption.textContent = 'Select a project';
+            defaultOption.disabled = true;
+            defaultOption.selected = true;
+            projectSelect.appendChild(defaultOption);
+            
+            // Add projects to select
+            if (Array.isArray(projects)) {
+                projects.forEach(project => {
+                    const option = document.createElement('option');
+                    option.value = project.id;
+                    option.textContent = project.title;
+                    projectSelect.appendChild(option);
+                });
+            } else if (projects.ongoing || projects.finished) {
+                // Handle the case where projects are separated into ongoing and finished
+                [...(projects.ongoing || []), ...(projects.finished || [])].forEach(project => {
+                    const option = document.createElement('option');
+                    option.value = project.id;
+                    option.textContent = project.title;
+                    projectSelect.appendChild(option);
+                });
+            } else {
+                throw new Error('Unexpected projects data format');
+            }
+        } catch (error) {
+            console.error('Error loading projects:', error);
+            alert(`Failed to load projects: ${error.message}`);
+        }
+
+        // Handle form submission
+        wrapper.querySelector(".submit-entry").addEventListener("click", async (e) => {
+            e.preventDefault();
+
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert('Please log in to create time entries');
+                return;
+            }
+
+            const projectId = document.querySelector('#project-select').value;
+            const date = document.querySelector('#date').value;
+            const startTime = document.querySelector('#starting_time').value;
+            const endTime = document.querySelector('#ending_time').value;
+            const notes = document.querySelector('textarea').value;
+
+            // Validate required fields
+            if (!projectId || !date || !startTime || !endTime) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            // Validate time order
+            if (startTime >= endTime) {
+                alert('End time must be after start time');
+                return;
+            }
+
+            try {
+                const response = await fetch('/time-entry', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        project_id: parseInt(projectId),
+                        date,
+                        start_time: startTime,
+                        end_time: endTime,
+                        notes
+                    }),
+                });
+
+                if (response.ok) {
+                    const timeEntry = await response.json();
+                    // Close the form
+                    wrapper.remove();
+                    // Refresh the calendar view
+                    window.dispatchEvent(new CustomEvent('timeEntryCreated', { detail: timeEntry }));
+                } else {
+                    const error = await response.json();
+                    alert('Failed to save time entry: ' + error.message);
+                }
+            } catch (error) {
+                console.error('Error saving time entry:', error);
+                alert('Error saving time entry. Please try again.');
+            }
+        });
+    }
 
 
-      // Makes an elemnet draggable (used for the time-entry container)
-      function makeDraggable(element) {
+    // Makes an elemnet draggable (used for the time-entry container)
+    function makeDraggable(element) {
         let isDown = false;
         let offset = [0, 0];
     
@@ -310,5 +429,224 @@ function adjustCalendarForMobile() {
 
 adjustCalendarForMobile();
 window.addEventListener("resize", adjustCalendarForMobile);
+
+// Load time entries for the current view
+async function loadTimeEntries() {
+  try {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.error('No authentication token found');
+      return;
+    }
+
+    const startDate = new Date(currentViewDate);
+    const endDate = new Date(currentViewDate);
+    endDate.setDate(endDate.getDate() + 6); // Add 6 days to get the end of the week
+
+    const response = await fetch(`/time-entry?start_date=${startDate.toISOString().split('T')[0]}&end_date=${endDate.toISOString().split('T')[0]}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    if (!response.ok) throw new Error('Failed to fetch time entries');
+    
+    const timeEntries = await response.json();
+    displayTimeEntries(timeEntries);
+  } catch (error) {
+    console.error('Error loading time entries:', error);
+  }
+}
+
+// Display time entries in the calendar
+function displayTimeEntries(timeEntries) {
+  // Clear existing time entries
+  document.querySelectorAll('.time-entry-block').forEach(block => block.remove());
+
+  timeEntries.forEach(entry => {
+    const entryDate = new Date(entry.date);
+    const dayIndex = (entryDate.getDay() + 6) % 7; // Convert Sunday (0) to 6, Monday (1) to 0, etc.
+    const dayColumn = document.querySelectorAll('.day-column')[dayIndex];
+    
+    if (!dayColumn) return;
+
+    const startTime = new Date(`2000-01-01T${entry.start_time}`);
+    const endTime = new Date(`2000-01-01T${entry.end_time}`);
+    
+    const startHour = startTime.getHours();
+    const startMinute = startTime.getMinutes();
+    const duration = (endTime - startTime) / (1000 * 60); // Duration in minutes
+    
+    const timeSlot = dayColumn.querySelector(`.time-slot:nth-child(${startHour + 1})`);
+    if (!timeSlot) return;
+
+    const entryBlock = document.createElement('div');
+    entryBlock.className = 'time-entry-block';
+    entryBlock.style.top = `${(startMinute / 60) * 100}%`;
+    entryBlock.style.height = `${(duration / 60) * 100}%`;
+    
+    // Format time to show only hours and minutes (5 String characters only so example: 14:30 not more)
+    const formatTime = (timeStr) => {
+      return timeStr ? timeStr.slice(0, 5) : '';
+    };
+    
+    entryBlock.innerHTML = `
+      <div class="entry-title">${entry.Project.title}</div>
+      <div class="entry-time">${formatTime(entry.start_time)} - ${formatTime(entry.end_time)}</div>
+      ${entry.notes ? `<div class="entry-notes">${entry.notes}</div>` : ''}
+    `;
+
+    // Make the entry block clickable
+    entryBlock.style.cursor = 'pointer';
+    entryBlock.addEventListener('click', () => editTimeEntry(entry));
+    
+    timeSlot.appendChild(entryBlock);
+  });
+}
+
+// Function to load and display existing time entry for editing
+async function editTimeEntry(entry) {
+    // Checks if a time entry is already shown
+    if (document.querySelector(".time-entry-container")) {return; }
+
+    const htmlPath = "/components/time-entry/time-entry.html";
+    const cssPath = "/components/time-entry/time-entry.css";
+  
+    // Load CSS
+    if (await fileExists(cssPath)) loadStyle(cssPath);
+  
+    // Load HTML
+    const res = await fetch(htmlPath);
+    const html = await res.text();
+  
+    // Inject into the DOM
+    const mainContent = document.querySelector("main #main-content");
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = html;
+    mainContent.appendChild(wrapper);
+  
+    // Make draggable
+    makeDraggable(document.querySelector(".time-entry-container"));
+
+    // Load projects and set the current project
+    try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            throw new Error('No authentication token found');
+        }
+
+        const response = await fetch('/projects', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        if (!response.ok) throw new Error('Failed to fetch projects');
+        
+        const projects = await response.json();
+        const projectSelect = document.querySelector('#project-select');
+        
+        // Clear existing options
+        projectSelect.innerHTML = '';
+        
+        // Add projects to select
+        if (Array.isArray(projects)) {
+            projects.forEach(project => {
+                const option = document.createElement('option');
+                option.value = project.id;
+                option.textContent = project.title;
+                if (project.id === entry.project_id) {
+                    option.selected = true;
+                }
+                projectSelect.appendChild(option);
+            });
+        } else if (projects.ongoing || projects.finished) {
+            [...(projects.ongoing || []), ...(projects.finished || [])].forEach(project => {
+                const option = document.createElement('option');
+                option.value = project.id;
+                option.textContent = project.title;
+                if (project.id === entry.project_id) {
+                    option.selected = true;
+                }
+                projectSelect.appendChild(option);
+            });
+        }
+
+        // Set the form values
+        document.querySelector('#date').value = entry.date;
+        document.querySelector('#starting_time').value = entry.start_time.slice(0, 5);
+        document.querySelector('#ending_time').value = entry.end_time.slice(0, 5);
+        document.querySelector('textarea').value = entry.notes || '';
+
+        // Update the submit button text
+        const submitButton = wrapper.querySelector('.submit-entry');
+        submitButton.textContent = 'Update';
+
+        // Handle form submission
+        submitButton.addEventListener('click', async (e) => {
+            e.preventDefault();
+
+            const projectId = document.querySelector('#project-select').value;
+            const date = document.querySelector('#date').value;
+            const startTime = document.querySelector('#starting_time').value;
+            const endTime = document.querySelector('#ending_time').value;
+            const notes = document.querySelector('textarea').value;
+
+            // Validate required fields
+            if (!projectId || !date || !startTime || !endTime) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            // Validate time order
+            if (startTime >= endTime) {
+                alert('End time must be after start time');
+                return;
+            }
+
+            try {
+                const response = await fetch(`/time-entry/${entry.id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        project_id: parseInt(projectId),
+                        date,
+                        start_time: startTime,
+                        end_time: endTime,
+                        notes
+                    }),
+                });
+
+                if (response.ok) {
+                    const updatedEntry = await response.json();
+                    // Close the form
+                    wrapper.remove();
+                    // Refresh the calendar view
+                    loadTimeEntries();
+                } else {
+                    const error = await response.json();
+                    alert('Failed to update time entry: ' + error.message);
+                }
+            } catch (error) {
+                console.error('Error updating time entry:', error);
+                alert('Error updating time entry. Please try again.');
+            }
+        });
+    } catch (error) {
+        console.error('Error loading projects:', error);
+        alert('Failed to load projects. Please try again.');
+    }
+
+    // Handle close button
+    wrapper.querySelector('.close-entry').addEventListener('click', () => {
+        wrapper.remove();
+    });
+}
+
+// Listen for new time entries
+window.addEventListener('timeEntryCreated', () => {
+  loadTimeEntries();
+});
 
 };
