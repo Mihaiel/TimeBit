@@ -5,6 +5,33 @@ const router = express.Router();
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *         first_name:
+ *           type: string
+ *         last_name:
+ *           type: string
+ *         email:
+ *           type: string
+ *           format: email
+ *         password:
+ *           type: string
+ *           format: password
+ *         created_at:
+ *           type: string
+ *           format: date-time
+ *         updated_at:
+ *           type: string
+ *           format: date-time
+ */
+
+/**
+ * @swagger
  * /auth/register:
  *   post:
  *     summary: Register a new user
@@ -38,11 +65,18 @@ const router = express.Router();
  *     responses:
  *       201:
  *         description: User successfully registered
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                 message:
+ *                   type: string
  *       400:
  *         description: Bad request (validation error)
  */
-router.post('/register', register);
-
 router.post('/register', register);
 
 /**
@@ -70,6 +104,19 @@ router.post('/register', register);
  *     responses:
  *       200:
  *         description: Successful login
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                 token:
+ *                   type: string
+ *                 refreshToken:
+ *                   type: string
+ *                 user:
+ *                   $ref: '#/components/schemas/User'
  *       401:
  *         description: Invalid credentials
  */
@@ -95,6 +142,15 @@ router.post('/login', login);
  *     responses:
  *       200:
  *         description: Token refreshed successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                 token:
+ *                   type: string
  *       401:
  *         description: Invalid refresh token or user not found
  */
@@ -109,6 +165,15 @@ router.post('/refresh-token', refreshToken);
  *     responses:
  *       200:
  *         description: User logged out
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                 message:
+ *                   type: string
  */
 router.post('/logout', logout);
 
@@ -120,9 +185,31 @@ router.post('/logout', logout);
  *     tags: [Auth]
  *     requestBody:
  *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - token
+ *             properties:
+ *               token:
+ *                 type: string
  *     responses:
  *       200:
  *         description: Successful Google login
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                 token:
+ *                   type: string
+ *                 refreshToken:
+ *                   type: string
+ *                 user:
+ *                   $ref: '#/components/schemas/User'
  *       401:
  *         description: Google authentication failed
  */
@@ -137,8 +224,14 @@ router.post('/google', googleAuth);
  *     responses:
  *       200:
  *         description: Client ID returned
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 clientId:
+ *                   type: string
  */
 router.get('/google-client-id', getGoogleClientId);
-
 
 export default router;

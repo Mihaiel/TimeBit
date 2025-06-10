@@ -5,100 +5,58 @@
 ====================================================================
 
 ***/
-
-.flexbox {
-	display: flex;
-	flex-wrap: wrap;
-	flex-direction: row;
-	max-height: 800px;
-	max-width: 800px;  
-	height: auto;
+.box.flexbox{
+	max-width: 800px;
 	width: auto;
-	align-items: stretch;
-	overflow-y: auto;
-	overflow-x: hidden;
-	padding: 50px;
 }
-  
-.flexbox-left {
+
+#projectForm {
+	padding: 40px;
 	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	width: 50%; 
-	box-sizing: border-box;
-	gap: 20px;	
-}
-  
-.flexbox-right {
-	display:flex;
-	flex-direction: column;
-	align-items: flex-end;
-	justify-content: space-between;
-	width: 50%;
-	box-sizing: border-box;  
-	gap: 20px;
-	padding-top: 90px;
-}	 
-
-/* responsive sedign for smaller screens */
-/* The flexbox will stack vertically on smaller screens */
-@media (max-width: 700px) {
-	.flexbox-left,
-	.flexbox-right {
-		width: 100%;
-	}
-
-	.flexbox {
-		flex-direction: column;
-		max-height: none;
-		height: auto;
-	}
-}
-  
-.miniflexbox {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	gap:10px;
-	margin-bottom: 10px;	
+	justify-content: space-evenly;
+	gap: 40px;
 }
 
-.miniflexbox > label {
-	width: 120px;
-	white-space: nowrap; /* Prevent text wrapping */	
-}
-  
-.button-container {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;  
-	align-items: center;
-	gap: 50px;
-}
-
-form {
+.form-section{
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
 }
 
-.project-type-tag{
-	background-color: var(--primary-color);
-	color: white !important;
-	border-radius: 20px;
-	padding: 5px 10px 5px 10px;
-}
-
-.notifications-checkbox-container{
+.flexbox-left, .flexbox-right{
 	display: flex;
+	flex-direction: column;
 	gap: 10px;
-	align-items: start;
 }
 
-.notifications-checkbox-container input{
-	margin-top: 4px;
+.button-container{
+	display: flex;
+	justify-content: end;
+	gap: 20px;
 }
 
+.button-container-outer{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px;
+}
+
+.button-red{
+	background-color: #B20000;
+}
+
+.button-green{
+	background-color: #355427;
+}
+
+.button-red:hover{
+	background-color: #B20000;
+}
+
+.button-green:hover{
+	background-color: #355427;
+}
 
 /* RESPONSIVENESS - SMALLER SCREENS */
 @media (max-width: 480px) {
@@ -121,5 +79,18 @@ form {
 }
 
 @media (max-width: 992px) {
+	#projectForm {
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	.flexbox-left, .flexbox-right{
+		width: 100%;
+	}
+
+	.box.flexbox{
+		max-width: 100%;
+		width: auto;
+}	
 
 }

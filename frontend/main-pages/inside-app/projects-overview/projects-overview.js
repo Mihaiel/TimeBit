@@ -1,60 +1,102 @@
-//Test data
-const ongoingProjects = [
-    {title: "Project A", img: "frontend\assets\images\foto1.png", alt:"This is the first project" },
-    {title: "Project B", img: "frontend\assets\images\foto2.jpg", alt:"This is the second project" },
-    {title: "Project C", img: "frontend\assets\images\foto3.jpg", alt:"This is the third project" },
-    {title: "Project D", img: "frontend\assets\images\foto4.jpg", alt:"This is the fourth project" },
-    {title: "Project E", img: "frontend\assets\images\this.jpg", alt:"This is the fifth project" },
-];
+import { loadPage } from "../../../utils/contentLoader.js";
+import { loadingScreen } from "../../../components/loading-screen/loading-screen.js";
 
-const finishedProjects = [
-    {title: "Minesweeper", img: "frontend\assets\images\minesweeper.png", alt: "This is minesweeper"}
-];
+window.pageInit = function () {
+    const newProjectButton = document.querySelector("button.new-project");
+    const ongoingProjectsContainer = document.querySelector(".project-container");
+    const finishedProjectsContainer = document.querySelectorAll(".project-container")[1];
+    const ongoingHeader = document.querySelector("h2.h-1.bold");
+    const finishedHeader = document.querySelectorAll("h2.h-1.bold")[1];
 
-// grab the containers by their IDs
-const ongoingProjectsContainer = document.getElementById("ongoing-projects");
-const finishedProjectsContainer = document.getElementById("finished-projects");
+    // Function to create a project element
+    function createProjectElement(project) {
+        const projectDiv = document.createElement('button');
+        projectDiv.className = 'project box';
+        
+        const titleP = document.createElement('p');
+        titleP.className = 'project-title';
+        titleP.textContent = project.title;
+        
+        projectDiv.appendChild(titleP);
 
-// function to create a project card
-function createProjectCard( {title, img, alt}) {
-    const card = document.createElement("div");
-    card.classList.add("project-card");
+        // Add click handler to load project details
+        projectDiv.addEventListener('click', () => {
+            // Store the project data in localStorage
+            localStorage.setItem('currentProject', JSON.stringify(project));
+            // Load the projects page
+            loadPage("projects");
+        });
 
-    if (img) {
-        card.innerHTML = `
-            <h3 class="project-title">${title}</h3>
-            <img src="${img}" alt="${alt}" class="project-image">           
-        `;
-    } else {
-        card.innerHTML = <p class="project-title">${title}</p>; 
-}
-    return card;
-}
+        return projectDiv;
+    }
 
-// append ongoing projects to the container
-ongoingProjects.forEach(project => {
-  const card = createProjectCard(project);
-  ongoingContainer.appendChild(card);
-});
+    // Function to load projects
+    async function loadProjects() {
+        try {
+            // Show loading screen
+            loadingScreen.show();
 
-// append finished projects to the container
-finishedProjects.forEach(project => {
-  const card = createProjectCard(project);
-  finishedContainer.appendChild(card);
-});
+            const response = await fetch('/projects', {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            });
 
-// Create the "Create New Project" card
-const createNewCard = document.createElement('div');
-createNewCard.className = 'project-card create-new';
-createNewCard.innerHTML = `
-  <div class="plus">+</div>
-  <p class="title">Create New Project</p>
-`;
+            if (!response.ok) {
+                throw new Error('Failed to fetch projects');
+            }
 
-// Add click event to redirect
-createNewCard.addEventListener('click', () => {
-  window.location.href = 'projects.html';
-});
+            const data = await response.json();
+            
+            // Handle ongoing projects
+            if (ongoingProjectsContainer) {
+                // Remove all project elements except the new project button
+                const projects = ongoingProjectsContainer.querySelectorAll('.project:not(.new-project)');
+                projects.forEach(project => project.remove());
 
-// Append "Create New Project" card at the end of ongoing projects
-ongoingContainer.appendChild(createNewCard);
+                // Add ongoing projects before the new project button
+                data.ongoing.forEach(project => {
+                    ongoingProjectsContainer.insertBefore(createProjectElement(project), newProjectButton);
+                });
+
+                // Update ongoing projects count
+                if (ongoingHeader) {
+                    ongoingHeader.textContent = `Ongoing Projects ${data.ongoing.length}`;
+                }
+            }
+
+            // Handle finished projects
+            if (finishedProjectsContainer) {
+                // Clear all existing projects
+                finishedProjectsContainer.innerHTML = '';
+
+                // Add finished projects
+                data.finished.forEach(project => {
+                    finishedProjectsContainer.appendChild(createProjectElement(project));
+                });
+
+                // Update finished projects count
+                if (finishedHeader) {
+                    finishedHeader.textContent = `Finished Projects ${data.finished.length}`;
+                }
+            }
+        } catch (error) {
+            console.error('Error loading projects:', error);
+            alert('Failed to load projects. Please try again.');
+        } finally {
+            // Hide loading screen
+            loadingScreen.hide();
+        }
+    }
+
+    // Load projects when page initializes
+    loadProjects();
+
+    if (newProjectButton) {
+        newProjectButton.addEventListener("click", function () {
+            // Clear any existing project data when creating new project
+            localStorage.removeItem('currentProject');
+            loadPage("projects");
+        });
+    }
+};

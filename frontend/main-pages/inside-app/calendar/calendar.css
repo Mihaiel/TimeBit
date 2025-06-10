@@ -117,8 +117,54 @@
 }
 
 .time-slot {
+	position: relative;
 	height: 60px;
-	border-bottom: 1px solid #f0f0f0;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.time-entry-block {
+	position: absolute;
+	left: 0;
+	right: 0;
+	background-color: #4a90e2;
+	color: white;
+	border-radius: 4px;
+	padding: 4px;
+	font-size: 12px;
+	overflow: hidden;
+	cursor: pointer;
+	transition: background-color 0.2s;
+	z-index: 2;
+}
+
+.time-entry-block:hover {
+	background-color: #357abd;
+}
+
+.entry-title {
+	font-weight: bold;
+	margin-bottom: 2px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.entry-time {
+	font-size: 11px;
+	opacity: 0.9;
+}
+
+.entry-notes {
+	font-size: 11px;
+	margin-top: 2px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* Add some spacing between time entries */
+.time-entry-block + .time-entry-block {
+	margin-top: 2px;
 }
 
 .event-block {
@@ -170,7 +216,7 @@
 	z-index: 2; /* Higher than others */
 	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 	border-radius: 8px;
-	overflow: visible; /* Ensure the shadow isn’t clipped */
+	overflow: visible; /* Ensure the shadow isn't clipped */
 }
 
 .calendar-day.today{

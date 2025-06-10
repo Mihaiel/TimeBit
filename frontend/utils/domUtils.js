@@ -8,8 +8,8 @@ export function loadStyle(href) {
     const existingLink = document.querySelector(`link.page-style[href="${href}"]`);
 
     if (existingLink) {
-    // If the stylesheet is already loaded, do nothing
-    return;
+        // If the stylesheet is already loaded, do nothing
+        return;
     }
 
     // Create a new <link> element for the stylesheet
@@ -29,32 +29,36 @@ export function loadStyle(href) {
  * @param {boolean} isModule - Whether the script should be loaded as a module (default is true)
  */
 export function loadScript(src, isModule = true) {
-  return new Promise((resolve, reject) => {
-    // Remove previously loaded page-specific scripts
-    document.querySelectorAll("script.page-script").forEach(script => script.remove());
+    return new Promise((resolve, reject) => {
+        // Remove previously loaded page-specific scripts
+        document.querySelectorAll("script.page-script").forEach(script => script.remove());
 
-    const script = document.createElement("script");
-    script.src = src;
-    script.className = "page-script";
-    script.type = isModule ? "module" : "text/javascript";
+        // Create a new script element
+        const script = document.createElement("script");
+        script.src = src;
+        script.className = "page-script";
+        script.type = isModule ? "module" : "text/javascript";
 
-    script.onload = () => {
-      console.log(`${src} loaded`);
-      if (typeof window.pageInit === "function") {
-        window.pageInit();
-      }
-      resolve();  // Resolve the promise
-    };
+        // Add a timestamp to prevent caching
+        script.src = `${src}?t=${Date.now()}`;
 
-    script.onerror = () => {
-      console.error(`Failed to load script: ${src}`);
-      reject(new Error(`Failed to load script: ${src}`));
-    };
+        script.onload = () => {
+            console.log(`${src} loaded`);
+            // Always call pageInit if it exists
+            if (typeof window.pageInit === "function") {
+                window.pageInit();
+            }
+            resolve();
+        };
 
-    document.body.appendChild(script);
-  });
+        script.onerror = () => {
+            console.error(`Failed to load script: ${src}`);
+            reject(new Error(`Failed to load script: ${src}`));
+        };
+
+        document.body.appendChild(script);
+    });
 }
-
 
 /**
  * Checks if a file exists by sending a HEAD request.
@@ -73,11 +77,11 @@ export function fileExists(path) {
 export function selectElement(clickedElement) {
     // Remove 'nav-selected' class from all elements
     document.querySelectorAll(".sidebar-button-container.nav-selected")
-    .forEach(el => el.classList.remove("nav-selected"));
+        .forEach(el => el.classList.remove("nav-selected"));
 
     // Sidebar settings button selected style removal
     document.querySelectorAll(".settings-button.nav-selected")
-    .forEach(el => el.classList.remove("nav-selected"));
+        .forEach(el => el.classList.remove("nav-selected"));
 
     // Add 'nav-selected' class to the clicked element
     clickedElement.classList.add("nav-selected");

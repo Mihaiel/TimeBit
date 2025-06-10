@@ -64,7 +64,6 @@
 #weather-icon {
     width: 33px;
     height: 33px;
-    background-color: var(--primary-color);
     border-radius: 50%;
 }
 

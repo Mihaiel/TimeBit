@@ -13,7 +13,7 @@ export const authMiddleware = (req, res, next) => {
         }
 
         const decoded = jwt.verify(token, config.jwtSecret);
-        req.user = decoded;
+        req.user = { id: decoded.userId };  // Map userId to id
         next();
     } catch (error) {
         if (error.name === 'TokenExpiredError') {
