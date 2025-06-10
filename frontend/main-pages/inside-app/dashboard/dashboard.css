@@ -5,24 +5,6 @@
 ====================================================================
 
 ***/
-/* Reset & Basis */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: "Inter", sans-serif;
-  background-color: #F8FAFC;
-  color: #374151;
-  line-height: 1.4;
-  text-align: center;
-  padding: 16px;
-}
-
 /* Dashboard Grid */
 .dashboard {
   display: grid;
