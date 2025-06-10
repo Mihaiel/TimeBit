@@ -1,13 +1,104 @@
-<p>frontend/main-pages/inside-app/dashboard/dashboard.html</p>
-    <script>
-      fetch("http://localhost:3000/api/time")
-        .then((res) => res.json())
-        .then((data) => {
-          const list = document.getElementById("entries");
-          data.forEach(entry => {
-            const li = document.createElement("li");
-            li.textContent = `${entry.task}: ${entry.duration}`;
-            list.appendChild(li);
-          });
-        });
-    </script>
+<!-- Dashboard HTML -->
+<div class="dashboard">
+
+  <!-- Top row: small summary cards -->
+  <div class="ongoing-projects card">
+    <h4>Ongoing Projects</h4>
+    <p class="value">1</p>
+    <small>out of 3</small>
+  </div>
+  <div class="finished-projects card">
+    <h4>Finished Projects</h4>
+    <p class="value">24</p>
+  </div>
+  <div class="time-spent card">
+    <h4>Time Spent</h4>
+    <p class="value">374</p>
+    <small>hours</small>
+  </div>
+
+  <!-- Second row: Day Streak + Donut chart spanning two columns -->
+  <div class="day-streak card">
+    <div class="streak-icon">🔥<span class="value">5</span></div>
+    <h4>Day Streak</h4>
+    <small>You are doing great! You are contributing to your projects every day!</small>
+  </div>
+  <div class="time-spent-per-project card">
+    <h4>Time spent per Project (This Week)</h4>
+    <svg class="donut-chart" viewBox="0 0 42 42">
+      <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#f1f5f9" stroke-width="6"/>
+      <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#5DAB6E" stroke-width="6" stroke-dasharray="52 48" stroke-dashoffset="25"/>
+      <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#51ABEC" stroke-width="6" stroke-dasharray="34 66" stroke-dashoffset="-23"/>
+      <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#FFCC00" stroke-width="6" stroke-dasharray="14 86" stroke-dashoffset="-57"/>
+      <circle cx="21" cy="21" r="12" fill="#fff"/>
+    </svg>
+    <div class="projects-list">
+      <div class="project-item"><span class="dot blue"></span>Project Name 1</div>
+      <div class="project-item"><span class="dot green"></span>Project Name 2</div>
+      <div class="project-item"><span class="dot yellow"></span>Project Name 3</div>
+    </div>
+  </div>
+
+  <!-- Third row: hours invested + area chart -->
+  <div class="hours-invested-this-week card">
+    <h4>Hours invested this week</h4>
+    <p class="value">7.4</p>
+    <small>out of 20</small>
+  </div>
+  <div class="hours-spent-every-day card">
+    <h4>Hours spent every day</h4>
+    <div class="week-dates">21. Feb - 28 Feb</div>
+    <div class="area-chart">
+      <svg viewBox="0 0 300 180" preserveAspectRatio="none">
+        <g class="grid">
+          <line x1="0" y1="20" x2="300" y2="20"/>
+          <line x1="0" y1="60" x2="300" y2="60"/>
+          <line x1="0" y1="100" x2="300" y2="100"/>
+          <line x1="0" y1="140" x2="300" y2="140"/>
+        </g>
+        <path class="avg"   d="M0,140 C50,120 100,130 150,100 S250,90 300,80 L300,180 L0,180 Z"/>
+        <path class="week"  d="M0,160 C50,140 100,150 150,110 S250,100 300,90 L300,180 L0,180 Z"/>
+        <g class="labels">
+          <text x="15"  y="175">Mon</text>
+          <text x="65"  y="175">Tue</text>
+          <text x="115" y="175">Wed</text>
+          <text x="165" y="175">Thu</text>
+          <text x="215" y="175">Fri</text>
+          <text x="265" y="175">Sat</text>
+        </g>
+      </svg>
+    </div>
+    <div class="legend">
+      <span class="legend-item avg">Average overall</span>
+      <span class="legend-item week">This week</span>
+    </div>
+  </div>
+
+  <!-- Fourth row: deadlines + category bar chart -->
+  <div class="project-deadlines card">
+    <h4>Project Deadlines</h4>
+    <div class="deadline-list">
+      <div class="deadline-item"><span class="dot blue"></span>Project Name 1 <span class="date">2 June 2025</span></div>
+      <div class="deadline-item"><span class="dot green"></span>Project Name 2 <span class="date">19 June 2025</span></div>
+      <div class="deadline-item"><span class="dot yellow"></span>Project Name 3 <span class="date">14 June 2025</span></div>
+    </div>
+  </div>
+  <div class="time-spent-per-category card">
+    <h4>Time Spent per Category</h4>
+    <div class="category-chart">
+      <div class="y-axis">
+        <span>100%</span><span>80%</span><span>60%</span><span>40%</span><span>20%</span><span>0%</span>
+      </div>
+      <div class="bars">
+        <div class="category-bar" style="height: 75%;"></div>
+        <div class="category-bar" style="height: 45%;"></div>
+        <div class="category-bar" style="height: 30%;"></div>
+        <div class="category-bar" style="height: 60%;"></div>
+      </div>
+      <div class="x-axis">
+        <span>Work</span><span>Personal</span><span>Study</span><span>Fitness</span>
+      </div>
+    </div>
+  </div>
+
+</div>

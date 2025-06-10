@@ -5,3 +5,284 @@
 ====================================================================
 
 ***/
+/* Reset & Basis */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #F8FAFC;
+  color: #374151;
+  line-height: 1.4;
+  text-align: center;
+  padding: 16px;
+}
+
+/* Dashboard Grid */
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows:
+    auto
+    auto
+    auto
+    auto;
+  grid-template-areas:
+    "ongoing finished time-spent"
+    "day-streak donut donut"
+    "hours-week area area"
+    "deadlines category category";
+  gap: 16px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* Card Basis */
+.card {
+  background: #FFF;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Headings & Values */
+.card h4 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+.value {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #51ABEC;
+  margin: 4px 0;
+}
+.card small {
+  font-size: 0.875rem;
+  color: #94A3B8;
+}
+
+/* Area Assignments */
+.ongoing-projects         { grid-area: ongoing; }
+.finished-projects        { grid-area: finished; }
+.time-spent               { grid-area: time-spent; }
+.day-streak               { grid-area: day-streak; }
+.time-spent-per-project   { grid-area: donut; }
+.hours-invested-this-week { grid-area: hours-week; }
+.hours-spent-every-day    { grid-area: area; }
+.project-deadlines        { grid-area: deadlines; }
+.time-spent-per-category  { grid-area: category; }
+
+/* Day Streak */
+.day-streak {
+  position: relative;
+  padding-top: 100px;
+}
+.streak-icon {
+  font-size: 3rem;
+  color: #F59E0B;
+  position: absolute;
+  top: 5px;
+}
+.streak-icon .value {
+  position: absolute;
+  top: 1px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  padding-top: 25px;
+}
+
+/* Donut Chart */
+.time-spent-per-project {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.donut-chart {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 16px;
+}
+.project-list {
+  display: flex;
+  gap: 24px;
+  margin-top: 8px;
+  font-size: 0.875rem;
+}
+.project-item {
+  display: flex;
+  align-items: center;
+  color: #374151;
+}
+.project-item .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+.dot.green  { background: #5DAB6E; }
+.dot.blue   { background: #51ABEC; }
+.dot.yellow { background: #FFCC00; }
+
+/* Hours Invested */
+.hours-invested-this-week .value {
+  margin-bottom: 4px;
+}
+
+/* Area Chart */
+.hours-spent-every-day {
+  display: flex;
+  flex-direction: column;
+}
+.week-dates {
+  font-size: 0.875rem;
+  color: #94A3B8;
+  margin-bottom: 12px;
+}
+.area-chart {
+  background: #F1F5F9;
+  border-radius: 12px;
+  width: 100%;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+.area-chart svg {
+  width: 100%;
+  height: 100%;
+}
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 12px;
+  font-size: 0.875rem;
+}
+.legend-item {
+  position: relative;
+  padding-left: 20px;
+  color: #374151;
+}
+.legend-item.avg::before,
+.legend-item.week::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 6px;
+  width: 16px; height: 4px;
+  border-radius: 2px;
+}
+.legend-item.avg::before  { background: purple; }
+.legend-item.week::before { background: #51ABEC; }
+
+/* Project Deadlines */
+.project-deadlines .deadline-list {
+  width: 100%;
+  margin-top: 16px;
+}
+.deadline-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #E5E7EB;
+  font-size: 0.875rem;
+}
+.deadline-item:last-child {
+  border-bottom: none;
+}
+.deadline-item .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+.project-deadlines .dot.blue   { background: #51ABEC; }
+.project-deadlines .dot.green  { background: #5DAB6E; }
+.project-deadlines .dot.yellow { background: #FFCC00; }
+.deadline-item .date {
+  color: #51ABEC;
+  margin-left: 8px;
+}
+
+/* Category Chart */
+.time-spent-per-category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.category-chart {
+  background: #F1F5F9;
+  border-radius: 12px;
+  padding: 16px;
+  width: 100%;
+  height: 160px;
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+}
+.y-axis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: #374151;
+  margin-right: 16px;
+}
+.bars {
+  display: flex;
+  flex: 1;
+  align-items: flex-end;
+  gap: 16px;
+}
+.category-bar {
+  flex: 1;
+  background-color: #51ABEC;
+  border-radius: 4px 4px 0 0;
+  position: relative;
+}
+.category-bar::after {
+  content: attr(data-percent);
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+}
+.x-axis {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: #374151;
+  margin-top: 12px;
+}
+
+/* Responsive unter 768px */
+@media (max-width: 768px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "ongoing"
+      "finished"
+      "time-spent"
+      "day-streak"
+      "time-project"
+      "hours-week"
+      "area"
+      "deadlines"
+      "category";
+  }
+}
